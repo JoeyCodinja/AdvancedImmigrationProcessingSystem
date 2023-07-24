@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 
 //MODELS
 import * as model from './db/model/models.js'
