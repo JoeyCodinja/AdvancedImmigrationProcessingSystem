@@ -1,14 +1,14 @@
 TO SET UP THIS PROJECT DO THE FOLLOWING
 
-- DOWNLOAD NODE
- - FOR WINDOWS GO [HERE](https://nodejs.org/dist/v18.17.0/node-v18.17.0-x64.msi)
- - FOR MAC GO [HERE](https://nodejs.org/dist/v18.17.0/node-v18.17.0.pkg)
+### DOWNLOAD NODE
+* FOR WINDOWS GO [HERE](https://nodejs.org/dist/v18.17.0/node-v18.17.0-x64.msi)
+* FOR MAC GO [HERE](https://nodejs.org/dist/v18.17.0/node-v18.17.0.pkg)
 
-- DOWNLOAD MONGODB
+### DOWNLOAD MONGODB
  - FOR WINDOWS GO [HERE](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-6.0.8-signed.msi)
  - FOR MAC GO [HERE](https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.8.tgz)
 
-- DOWNLOAD THE CODE FROM GITHUB
+### DOWNLOAD THE CODE FROM GITHUB
  - THE CODEBASE CAN BE FETCHED FROM THIS [LINK](https://github.com/JoeyCodinja/AdvancedImmigrationProcessingSystem)
  - Click on the CODE button and select the "Download ZIP" option.
 
