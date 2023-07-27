@@ -5,11 +5,52 @@
       <p class="flex-1 sep-right"><font-awesome-icon icon="fa-solid fa-bars"/>Menu</p>
       <p class="flex-1"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/>Search</p>
     </div>
-    <router-link to="/cases"><img src=""/>Cases</router-link>
-    <p><font-awesome-icon icon="fa-solid fa-gear"/>Settings</p>
-    <router-link to="/admin/generative-resources">Training Data</router-link>
-    <router-link to="/admin/question-management">Question Management</router-link>
-    <router-link to="/admin/prompt-engineering">Prompt Engineering</router-link>
+    <router-link to="/cases" v-if="$route.path!=='/cases'"><img src=""/>Cases</router-link>
+    <router-link to="/cases" v-if="$route.path==='/cases'" class="text-yellow-400"><img src=""/>Cases</router-link>
+    <p v-if="!$route.path.includes('admin')">
+      <font-awesome-icon
+        icon="fa-solid fa-gear"/>
+      Settings
+    </p>
+    <p v-if="$route.path.includes('admin')" class="text-yellow-400">
+      <font-awesome-icon
+        icon="fa-solid fa-gear"
+        class="text-yellow-400" />
+      Settings
+    </p>
+    <router-link
+      to="/admin/generative-resources"
+      v-if="$route.path!=='/admin/generative-resources'">
+      Training Data
+    </router-link>
+    <router-link
+      to="/admin/generative-resources"
+      v-if="$route.path==='/admin/generative-resources'" class="text-yellow-400">
+      Training Data
+    </router-link>
+
+    <router-link
+      v-if="$route.path!=='/admin/question-management'"
+      to="/admin/question-management">
+      Question Management
+    </router-link>
+    <router-link
+      to="/admin/question-management"
+      v-if="$route.path==='/admin/question-management'" class="text-yellow-400">
+      Question Management
+    </router-link>
+
+    <router-link
+      to="/admin/prompt-engineering"
+      v-if="$route.path!=='/admin/prompt-engineering'">
+      Prompt Engineering
+    </router-link>
+    <router-link
+      to="/admin/prompt-engineering"
+      v-if="$route.path==='/admin/prompt-engineering'" class="text-yellow-400">
+      Prompt Engineering
+    </router-link>
+
     <div class="flex flex-row items-center">
       <img src="/power-32.png"/>
       Logout
