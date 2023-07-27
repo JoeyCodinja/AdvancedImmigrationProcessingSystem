@@ -36,3 +36,8 @@ export const purposeOfVisitSchema = new Schema({
     purpose: String,
     slug: String,
 })
+
+export const promptSchema = new Schema({
+    prompt: String,
+    enabled: Boolean
+})

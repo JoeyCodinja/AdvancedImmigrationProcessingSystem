@@ -47,6 +47,12 @@ app.get('/api/purposes-of-visit', (req,res) => {
     })
 })
 
+app.get('/api/prompts', (req, res) => {
+    let allPrompts = model.Prompt.find({}).exec().then((result) => {
+        res.send(result);
+    })
+})
+
 app.post('/api/prompt-chatgpt', (req, res, next) => {
     let openai_request_body = {
         "model": "gpt-3.5-turbo",
