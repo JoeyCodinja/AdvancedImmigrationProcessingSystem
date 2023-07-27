@@ -1,0 +1,7 @@
+{"_id":{"$oid":"64b4883a0a9ba36b69b2c302"},"purpose":"Visiting Friends/Relatives","slug":"friends-relatives"}
+{"_id":{"$oid":"64b488520a9ba36b69b2c304"},"purpose":"Vacation","slug":"vacation"}
+{"_id":{"$oid":"64b488780a9ba36b69b2c306"},"purpose":"Business/Meeting","slug":"business-meeting"}
+{"_id":{"$oid":"64b4889d0a9ba36b69b2c308"},"purpose":"In transit","slug":"in-transit"}
+{"_id":{"$oid":"64b488c10a9ba36b69b2c30a"},"purpose":"Resident","slug":"resident"}
+{"_id":{"$oid":"64b488e20a9ba36b69b2c30c"},"purpose":"Work","slug":"work"}
+{"_id":{"$oid":"64b489010a9ba36b69b2c30e"},"purpose":"Honeymoon/Wedding","slug":"honeymoon-wedding"}
