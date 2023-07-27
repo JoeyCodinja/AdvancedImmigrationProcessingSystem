@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import 'dotenv/config';
 import http from 'node:http';
 import https from 'node:https';
@@ -8,6 +9,7 @@ import https from 'node:https';
 import * as model from './db/model/models.js'
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const AIPSCONNECT = mongoose.connect('mongodb://127.0.0.1:27017/AIPS')
