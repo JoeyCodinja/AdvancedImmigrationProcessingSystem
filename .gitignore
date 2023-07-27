@@ -1,3 +1,4 @@
 package-lock.json
 ias/package-lock.json
 aips-server/package-lock.json
+aips-server/.env
