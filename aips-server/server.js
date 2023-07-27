@@ -41,6 +41,12 @@ app.get('/api/cases', (req, res) => {
     })
 })
 
+app.get('/api/categories', (req,res,next) => {
+    let allCategories = model.Category.find({}).exec().then((result) => {
+        res.send(result);
+    })
+})
+
 app.get('/api/purposes-of-visit', (req,res) => {
     let allPurposesOfVisits = model.PurposeOfVisit.find({}).exec().then((result) => {
         res.send(result);
