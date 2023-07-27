@@ -8,8 +8,12 @@ TO SET UP THIS PROJECT DO THE FOLLOWING
  - FOR WINDOWS GO [HERE](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-6.0.8-signed.msi)
  - FOR MAC GO [HERE](https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-6.0.8.tgz)
 
+### DOWNLOAD MONGODB TOOLS
+ - FOR WINDOWS GO [HERE](https://downloads.mongodb.org/migrator/1.1.3/MongoDB%20Relational%20Migrator-1.1.3.msi)
+ - FOR MAC GO [HERE](https://downloads.mongodb.org/migrator/1.1.3/MongoDB%20Relational%20Migrator-1.1.3.dmg)
+
 ### DOWNLOAD THE CODE FROM GITHUB
- - THE CODEBASE CAN BE FETCHED FROM THIS [LINK](https://github.com/JoeyCodinja/AdvancedImmigrationProcessingSystem)
+ - THE CODEBASE CAN BE FETCHED FROM THIS [LINK](https://www.mongodb.com/try/download/relational-migrator#)
  - Click on the CODE button and select the "Download ZIP" option.
 
 
