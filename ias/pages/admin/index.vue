@@ -1,6 +1,5 @@
 <template>
-  <BasePage>
-    <p>Admin</p>
+  <BasePage tilte="Admin">
   </BasePage>
 
 </template>

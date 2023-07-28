@@ -1,7 +1,6 @@
 <template>
-  <BasePage>
+  <BasePage title="Current Training Data Documents">
     <div class="flex flex-col">
-      <h2 class="text-5xl font-extrabold">Current Training Data Documents</h2>
       <p style="padding-bottom: 2rem;display:block;" class="text-2xl">
         These documents are use to form the context
         through which the questions in the system

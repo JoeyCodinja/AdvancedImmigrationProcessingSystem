@@ -1,10 +1,7 @@
 <template>
-  <BasePage>
+  <BasePage title="Prompt Engineering">
     <div class="flex flex-col">
-      <p class="font-extrabold text-5xl">Prompt Engineering</p>
-
       <p class="italic text-2xl">Prompts in use</p>
-
       <div class="prompt-box flex flex-col">
         <p class="flex-2">Generate questions which use the Aliens Act (1946) which would restrict entry to the port of Jamaica ?</p>
         <div class="flex flex-row w-full flex-1 gap-8">

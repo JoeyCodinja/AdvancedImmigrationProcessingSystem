@@ -1,7 +1,6 @@
 <template>
-  <BasePage>
+  <BasePage title="Question Management - AI Generation">
     <div class="flex flex-col">
-      <p class="font-extrabold text-5xl"> Question Management - AI Generation</p>
       <button v-on:click="populatePrompts">Generate new Questions</button>
       <div v-show="show_prompts">
         <div class="box w-1/2" v-for="prompt in prompts">
@@ -23,6 +22,7 @@
 import axios from "axios";
 
 export default{
+  loading: true,
   data() {
     return {
       "questions_generated": false,
@@ -36,8 +36,13 @@ export default{
     }
   },
   methods: {
+    toggleLoading() {
+      this.loading = !this.loading ;
+    },
     async populatePrompts() {
+      this.toggleLoading();
       await this.$store.dispatch('prompts/retrievePrompts')
+      this.toggleLoading();
       this.$data.show_prompts = true;
     },
     parseQuestions(questionsString) {
@@ -45,19 +50,20 @@ export default{
       let questionsIterator = questionsString.matchAll(question_regex);
       let questionsToReturn = [];
       for (let question of questionsIterator) {
-        debugger;
         questionsToReturn.push(question[0]);
       }
       return questionsToReturn;
     },
     async generateQuestions(prompt) {
       let component= this
+      this.toggleLoading();
       await axios.post("http://localhost:8080/api/prompt-chatgpt", {
         content: prompt
       }).then((response) => {
         component.$data.generated_questions = component.parseQuestions(response.data.choices[0]['message']['content']);
         component.$data.show_prompts = false;
         component.$data.questions_generated = true;
+        component.toggleLoading();
       })
     },
     async addNewQuestion(question) {

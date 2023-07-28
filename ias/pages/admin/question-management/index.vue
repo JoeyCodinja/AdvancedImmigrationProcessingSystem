@@ -1,7 +1,6 @@
 <template>
-  <BasePage>
+  <BasePage title="Question Management">
     <div class="flex flex-col">
-      <p class="font-extrabold text-5xl">Question Management</p>
       <p> Add New Question</p>
       <router-link to="/admin/question-management/ai-generation">Generate New Questions</router-link>
       <div class="box w-1/2" v-for="question in questions">

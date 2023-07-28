@@ -1,5 +1,5 @@
 <template>
-  <BasePage>
-    New Case
+  <BasePage title="Case - New Case">
+    Body
   </BasePage>
 </template>
