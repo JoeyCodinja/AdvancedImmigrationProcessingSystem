@@ -34,3 +34,18 @@ To run the API part of the project run the following command
 To run the UI portion of the project run the following command
 
 `npm run dev-run`
+
+To populate  the DB
+
+Run the following command substituting the <collection> tag with the collections listed below
+
+`mongoimport --collection=<collection> --db AIPS db_backup/<collection>.json`
+
+- category
+- declared_item
+- entrants
+- entry
+- prompt
+- purpose_of_visit
+- prompt
+- question
