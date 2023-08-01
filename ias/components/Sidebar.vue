@@ -12,49 +12,49 @@
         icon="fa-solid fa-gear"/>
       Settings
     </p>
-    <p v-if="$route.path.includes('admin')" class="text-yellow-400 flex-1 pl-4">
+    <p v-if="$route.path.includes('admin')" class="text-yellow-400 flex-initial pl-4 text-2xl">
       <font-awesome-icon
         icon="fa-solid fa-gear"
-        class="text-yellow-400 pl-4" />
+        class="text-yellow-400" />
       Settings
     </p>
     <router-link
       to="/admin/generative-resources"
       v-if="$route.path!=='/admin/generative-resources'"
-      class="flex-1 pl-4">
-      Training Data
+      class="flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-book"/> Training Data
     </router-link>
     <router-link
       to="/admin/generative-resources"
-      v-if="$route.path==='/admin/generative-resources'" class="text-yellow-400 flex-1 pl-4">
-      Training Data
+      v-if="$route.path==='/admin/generative-resources'" class="text-yellow-400 flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-book"/> Training Data
     </router-link>
 
     <router-link
       v-if="$route.path!=='/admin/question-management'"
       to="/admin/question-management"
-      class="flex-1 pl-4">
-      Question Management
+      class="flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-clipboard-question"/> Question Management
     </router-link>
     <router-link
       to="/admin/question-management"
-      v-if="$route.path==='/admin/question-management'" class="text-yellow-400 flex-1 pl-4">
-      Question Management
+      v-if="$route.path==='/admin/question-management'" class="text-yellow-400 flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-clipboard-question"/> Question Management
     </router-link>
 
     <router-link
       to="/admin/prompt-engineering"
       v-if="$route.path!=='/admin/prompt-engineering'"
-      class="flex-1 pl-4">
-      Prompt Engineering
+      class="flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-terminal"/> Prompt Engineering
     </router-link>
     <router-link
       to="/admin/prompt-engineering"
-      v-if="$route.path==='/admin/prompt-engineering'" class="text-yellow-400 flex-1 pl-4">
-      Prompt Engineering
+      v-if="$route.path==='/admin/prompt-engineering'" class="text-yellow-400 flex-initial pl-12 text-2xl">
+      <font-awesome-icon icon="fa-solid fa-terminal"/> Prompt Engineering
     </router-link>
 
-    <div class="flex flex-row items-center pl-4">
+    <div class="flex flex-row items-center pl-4 text-2xl mt-auto">
       <img src="/power-32.png"/>
       Logout
     </div>
@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style>
+.last-in-list {
+  margin-bottom: 3rem !important;
+}
 .sep-right {
   border-right: 1px white solid;
 }
@@ -75,4 +78,10 @@ export default {
 .sep-left {
   border-left: 1px white solid;
 }
+
+.min-w-fifth > a, p{
+  margin-bottom: 0.75rem
+}
+
+
 </style>
