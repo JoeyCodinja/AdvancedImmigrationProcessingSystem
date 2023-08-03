@@ -15,7 +15,6 @@ export const entrantSchema = new Schema({
     last_name: String,
     gender: String,
     date_of_birth: Date,
-    family_members_accompanying: Number,
 })
 
 export const entrySchema = new Schema({

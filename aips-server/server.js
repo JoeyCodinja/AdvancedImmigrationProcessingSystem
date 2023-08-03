@@ -35,7 +35,28 @@ app.get('/api/entrants', (req,res) => {
     })
 })
 
-app.get('/api/cases', (req, res) => {
+app.post('/api/entrants/find/', (req, res) => {
+    let result;
+    let entrantHistory = model.Entry.find({passport_number: req.body.passport_number}).exec().then( (history) => {
+        let foundEntrant = model.Entrant.find({id: history[0].entrant_id}).exec().then((result) => {
+            let responseBody = {
+                "entrant": result,
+                "history": history
+            }
+            res.send(responseBody);
+        }).catch((error) => {
+            console.log("Something went wrong");
+            console.log(error);
+            res.status(500).send()
+        })
+    }).catch((error) => {
+        console.log("Something went wrong");
+        console.log(error);
+        res.status(500).send()
+    });
+})
+
+app.get('/api/cases', (req, res, next) => {
     let allCases = model.Entry.find({}).exec().then((result) => {
         res.send(result);
     })
