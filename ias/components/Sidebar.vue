@@ -1,13 +1,17 @@
 <template>
   <div class="bg-black text-white min-w-fifth min-h-full flex flex-col flex-full">
     <router-link to="/"><img src="/pica_logo-removebg-preview.png"/></router-link>
-    <div class="flex flex-row items-center flex-two">
-      <p class="flex-1 sep-right text-center"><font-awesome-icon icon="fa-solid fa-bars"/>Menu</p>
-      <p class="flex-1 sep-left text-center"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/>Search</p>
+    <div class="flex flex-row items-center basis-40">
+      <p class="flex-1 sep-right text-center text-3xl"><font-awesome-icon icon="fa-solid fa-bars"/> Menu</p>
+      <p class="flex-1 sep-left text-center text-3xl"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/> Search</p>
     </div>
-    <router-link to="/cases" v-if="$route.path!=='/cases'" class="flex-1 pl-4"><img src=""/>Cases</router-link>
-    <router-link to="/cases" v-if="$route.path==='/cases'" class="text-yellow-400 flex-1 pl-4"><img src=""/>Cases</router-link>
-    <p v-if="!$route.path.includes('admin')" class="flex-1 pl-4">
+    <router-link to="/cases" v-if="$route.path!=='/cases'" class="flex-initial pl-4 text-2xl"><img src=""/><font-awesome-icon icon="fa-regular fa-file"/> Cases</router-link>
+    <router-link to="/cases" v-if="$route.path==='/cases'" class="text-yellow-400 flex-initial pl-4 text-2xl"><img src=""/><font-awesome-icon icon="fa-regular fa-file"/> Cases</router-link>
+    <router-link to="/cases/new" v-if="$route.path!=='/cases/new'" class="pl-12 text-2xl"><font-awesome-icon icon="fa-regular fa-square-plus"/> New </router-link>
+    <router-link to="/cases/new" v-if="$route.path==='/cases/new'" class="pl-12 text-yellow-400 text-2xl"><font-awesome-icon icon="fa-regular fa-square-plus"/> New </router-link>
+    <router-link to="/cases" v-if="$route.path!=='/cases/review'" class="pl-12 text-2xl mb-4 last-in-list"><font-awesome-icon icon="fa-solid fa-binoculars"/> Review</router-link>
+    <router-link to="/cases" v-if="$route.path==='/cases/review'" class="pl-12 text-yellow-400 text-2xl mb-4 last-in-list"><font-awesome-icon icon="fa-solid fa-binoculars"/> Review</router-link>
+    <p v-if="!$route.path.includes('admin')" class="flex-initial pl-4 text-2xl">
       <font-awesome-icon
         icon="fa-solid fa-gear"/>
       Settings
