@@ -4,12 +4,12 @@
       <div class="flex flex-row">
         <img src="/entrant-headshot.png">
         <div class="">
-          <p>Risk Rating: <span class="good-risk">98</span></p>
-          <p>First Name: <span>Derek</span></p>
-          <p>Last Name: <span>Jeter</span></p>
-          <p>Arriving From: <span>MIA</span></p>
-          <p>Nationality: <span>Jamaican</span></p>
-          <p>Status: Pending</p>
+          <p class="text-xl">Safety Rating: <span class="good-risk">98</span></p>
+          <p class="text-xl">First Name: <span class="font-bold">Derek</span></p>
+          <p class="text-xl">Last Name: <span class="font-bold">Jeter</span></p>
+          <p class="text-xl">Arriving From: <span class="font-bold">MIA</span></p>
+          <p class="text-xl">Nationality: <span class="font-bold">Jamaican</span></p>
+          <p class="text-xl">Status: <span class="font-bold">Pending</span></p>
         </div>
       </div>
       <div class="flex flex-col">
@@ -22,7 +22,7 @@
           <EntrantOverview v-bind:entrant="entrant"/>
         </div>
         <div v-show="show_travel_history">
-          <EntrantHistory v-bind:history="history"/>
+          <EntrantHistory v-bind:history="entrantHistory"/>
         </div>
         <div v-show="show_interview_questions"> Interview Questions </div>
       </div>

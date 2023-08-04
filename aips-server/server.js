@@ -11,6 +11,10 @@ import * as model from './db/model/models.js'
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    next(err);
+})
 
 const AIPSCONNECT = mongoose.connect('mongodb://127.0.0.1:27017/AIPS')
 
@@ -19,10 +23,21 @@ app.get('/api/questions', (req, res) => {
         res.send(result);
     });
 })
+
+app.get('/api/questions/', (req, res, next) => {
+    try {
+        let question = model.Question.findOne({}).exec().then((result) => {
+            res.send(result);
+        });
+    } catch (error) {
+        next(error);
+    }
+})
+
 app.post('/api/questions/new', (req, res) => {
     if (req.body){
         model.Question.create(req.body).then((result) => {
-            res.send(result);
+            res.status(201).send(result);
         });
     } else {
         res.status(400).send("Bad request");

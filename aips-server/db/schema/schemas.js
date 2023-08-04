@@ -21,14 +21,15 @@ export const entrySchema = new Schema({
     id: Number,
     entrant_id: Number,
     occupation: String,
-    date_of_entry: Date,
+    date_of_entry: String,
     passport_number: String,
     country_of_issue: String,
     flight_name: String,
     flight_number: String,
     departure_port: String,
     purpose_of_visit: String,
-    contact_info: String
+    contact_info: String,
+    safety_rating: Number
 })
 
 export const purposeOfVisitSchema = new Schema({
@@ -45,3 +46,4 @@ export const promptSchema = new Schema({
     prompt: String,
     enabled: Boolean
 })
+

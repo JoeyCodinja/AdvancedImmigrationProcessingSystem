@@ -31,3 +31,20 @@
   box-shadow: -5px -5px 10px darkgreen;
 }
 
+.bad-risk {
+  color: red;
+}
+
+.ok-risk {
+  color: navy;
+}
+
+.good-risk {
+  border-radius: 100%;
+  border: 5px solid limegreen;
+}
+
+.tentative-risk {
+  color: yellow;
+}
+

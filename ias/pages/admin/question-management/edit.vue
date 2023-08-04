@@ -1,6 +1,6 @@
 <template>
-  <BasePage>
-    <div>
+  <BasePage title="Question Management - Edit">
+    <div class="flex flex-col">
       <form>
         <label for="question">Question</label>
         <input name="question" type="text"/>
@@ -13,7 +13,7 @@
           <option>Declared Items</option>
           <option>Declared Items</option>
         </select>
-        <!-- Space for a plus icon for adding categories -->
+        <!-- Space for a plus icon for adding categories.js -->
         <input name="new-category" type="text" hidden="true">
         <input name="new-category-slug" type="text" hidden="true">
         <input type="submit">
@@ -22,3 +22,11 @@
   </BasePage>
 </template>
 
+<script>
+export default {
+  props: ['id'],
+  beforeMount() {
+    this.$store.dispatch('')
+  }
+}
+</script>
