@@ -23,9 +23,11 @@ Copy the path at which  the file that was downloaded above was and enter the fol
 
 `cd <directory where zip file was downloaded>`
 
-Install the dependencies necessary to run the project with the command below
+Install the dependencies necessary to run the project with the commands below
 
-`npm install`
+`npm install --legacy-peer-deps`
+
+`cd aips-server && npm install`
 
 To run the API part of the project run the following command
 
