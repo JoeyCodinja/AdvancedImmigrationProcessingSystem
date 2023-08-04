@@ -1,9 +1,17 @@
 <template>
-  <div class="flex flex-row" v-for="entry in history">
-    <p>{{entry.first_name}} {{entry.last_name}}</p>
+  <div class="flex flex-col">
+    <div class="flex flex-row shadow-sm" v-for="entry in history">
+      <div class="flex flex-col">
+        <p>Date of Entry <span class="underline">{{entry.date_of_entry}} </span></p>
+        <p>Passport Number <span class="underline">{{entry.passport_number}}</span></p>
+        <p>Passport Country of Issue <span class="underline">{{entry.passport_country_issue}}</span></p>
+        <p>Purpose of Visit <span class="underline">{{entry.passport_country_issue}}</span></p>
+      </div>
 
-    <div class="text-2xl">
-      {{entry.safety_rating}}
+      <div class="text-2xl flex flex-col">
+        <p>Safety Rating</p>
+        <p><span>{{entry.safety_rating}}</span></p>
+      </div>
     </div>
   </div>
 </template>
@@ -12,6 +20,11 @@
 export default {
   props: {
     history: Array,
+  },
+  methods: {
+    safety_rating_style: {
+
+    }
   }
 }
 </script>
