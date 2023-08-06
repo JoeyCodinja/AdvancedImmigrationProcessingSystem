@@ -53,7 +53,7 @@ app.get('/api/entrants', (req,res) => {
 app.post('/api/entrants/find/', (req, res) => {
     let result;
     let entrantHistory = model.Entry.find({passport_number: req.body.passport_number}).exec().then( (history) => {
-        let foundEntrant = model.Entrant.find({id: history[0].entrant_id}).exec().then((result) => {
+        let foundEntrant = model.Entrant.findOne({id: history[0].entrant_id}).exec().then((result) => {
             let responseBody = {
                 "entrant": result,
                 "history": history
