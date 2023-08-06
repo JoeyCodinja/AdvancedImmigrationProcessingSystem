@@ -1,6 +1,6 @@
 <template>
   <BasePage title="Case - Review">
-    <div class="flex flex-col">
+    <div class="flex flex-col flex-wrap flex-1">
       <div class="flex flex-row">
         <img src="/entrant-headshot.png">
         <div class="">
@@ -16,7 +16,6 @@
         <div class="flex flex-row">
           <p class="mx-auto" v-on:click="toggle('overview')">Overview</p>
           <p class="mx-auto" v-on:click="toggle('travel_history')">Travel History</p>
-          <p class="mx-auto" v-on:click="toggle('interview_questions')">Interview Questions</p>
         </div>
         <div v-show="show_overview">
           <EntrantOverview v-bind:entrant="entrant"/>
@@ -24,8 +23,11 @@
         <div v-show="show_travel_history">
           <EntrantHistory v-bind:history="entrantHistory"/>
         </div>
-        <div v-show="show_interview_questions"> Interview Questions </div>
       </div>
+
+    </div>
+    <div class="flex flex-col flex-1">
+      Interview Questions
     </div>
 
 
@@ -38,7 +40,6 @@ export default{
     return {
       show_overview: true,
       show_travel_history: false,
-      show_interview_questions: false,
     }
   },
   computed: {
@@ -53,17 +54,14 @@ export default{
     toggle(panel){
       switch(panel){
         case 'overview':
-          this.$data.show_interview_questions=false;
           this.$data.show_overview=true;
           this.$data.show_travel_history=false;
           break;
         case 'travel_history':
-          this.$data.show_interview_questions=false;
           this.$data.show_overview=false;
           this.$data.show_travel_history=true;
           break;
         case 'interview_questions':
-          this.$data.show_interview_questions=true;
           this.$data.show_overview=false;
           this.$data.show_travel_history=false;
           break;
