@@ -14,8 +14,8 @@
       </div>
       <div class="flex flex-col">
         <div class="flex flex-row">
-          <p class="mx-auto" v-on:click="toggle('overview')">Overview</p>
-          <p class="mx-auto" v-on:click="toggle('travel_history')">Travel History</p>
+          <p class="flex flex-1 bottom-border text-center text-2xl font-bold right-border tab-padding" v-on:click="toggle('overview')">Overview</p>
+          <p class="flex flex-1 bottom-border text-center text-2xl font-bold tab-padding" v-on:click="toggle('travel_history')">Travel History</p>
         </div>
         <div v-show="show_overview">
           <EntrantOverview v-bind:entrant="entrant"/>
@@ -95,3 +95,17 @@ export default{
   }
 }
 </script>
+
+<style>
+.bottom-border {
+  border-bottom: 2px black solid;
+}
+
+.right-border {
+  border-right: 2px black solid;
+}
+
+.tab-padding {
+  padding-left:2rem;
+}
+</style>
