@@ -48,5 +48,18 @@ export const actions = {
     } catch (e) {
       console.log("Something bad happened");
     }
+  },
+  async retrieveInterviewQuestions({commit}, entrantId){
+    try{
+      await axios.post(`http://localhost:8080/api/questions/interview/${entrantId}`).then((response) => {
+        if (response.status === 200){
+          commit('addInterviewQuestions', response.data);
+        }
+      }).catch((error) => {
+        console.log("Something bad happened");
+      })
+    } catch(e) {
+      console.log("Something bad happened");
+    }
   }
 }
