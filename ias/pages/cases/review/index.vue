@@ -27,7 +27,21 @@
 
     </div>
     <div class="flex flex-col flex-1">
-      Interview Questions
+      <p class="text-5xl">Interview Questions</p>
+      <div class="bottom-border mt-3" v-for="question of interviewQuestions">
+        <p class="text-2xl">{{ question.question }}</p>
+        <div v-if="question.canned_response">
+          Buttons
+        </div>
+        <div v-else>
+          <textarea type="text"/>
+        </div>
+        <div class="question">
+          <button>Acceptable</button>
+          <button>Unacceptable</button>
+          <button>Skip</button>
+        </div>
+      </div>
     </div>
 
 
@@ -48,6 +62,9 @@ export default{
     },
     entrantHistory() {
       return this.$store.getters['entrants/getCurrentEntrantHistory'];
+    },
+    interviewQuestions() {
+      return this.$store.getters['questions/getAllInterviewQuestions'];
     }
   },
   methods: {
@@ -71,7 +88,10 @@ export default{
     },
   },
   beforeMount() {
-    this.$store.dispatch('entrants/findEntrant', "F77698918")
+    this.$store.dispatch('entrants/findEntrant', "F77698918");
+  },
+  mounted() {
+    this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id);
   }
 }
 </script>
