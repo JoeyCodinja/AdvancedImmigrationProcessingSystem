@@ -44,6 +44,21 @@ app.post('/api/questions/new', (req, res) => {
     }
 })
 
+app.post('/api/questions/interview/:entrant_id', (req, res) => {
+    const questionCount = 5
+    model.Question.find({}).exec().then((result) => {
+        let interviewQuestions = () => {
+            let interviewArray = [];
+            for (let count of Array(questionCount).keys()){
+                interviewArray.push(result[Math.floor(Math.random() * questionCount)]);
+            }
+            return interviewArray;
+        }
+        res.send(interviewQuestions());
+    });
+})
+
+
 app.get('/api/entrants', (req,res) => {
     let allEntrants = model.Entrant.find({}).exec().then((result) => {
         res.send(result);

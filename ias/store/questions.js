@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const state = () => ({
-  questions: []
+  questions: [],
+  interviewQuestions: []
 })
 
 export const getters = {
@@ -10,6 +11,12 @@ export const getters = {
   },
   getQuestionCount(state) {
     return state.questions.length;
+  },
+  getAllInterviewQuestions(state) {
+    return state.interviewQuestions;
+  },
+  getInterviewQuestionCount(state) {
+    return state.interviewQuestions.length;
   }
 }
 
@@ -22,6 +29,14 @@ export const mutations = {
   addQuestions(state, questions) {
     // Incomplete, needs to get value fo the question to be added
     state.questions = questions;
+  },
+
+  addInterviewQuestions(state, questions) {
+    state.interviewQuestions = questions
+  },
+
+  addInterviewQuestion(state, question) {
+    state.interviewQuestions.push(question);
   }
 }
 
