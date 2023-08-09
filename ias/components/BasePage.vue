@@ -1,17 +1,17 @@
 <template>
-  <div class="flex h-screen">
-      <Sidebar/>
-      <div class="flex flex-col" style="min-width:80%">
-        <TopBar/>
-        <div class="h-20">
-          <p class="font-extrabold text-5xl">
-            {{title}}
-          </p>
-        </div>
-        <div class="flex flex-row flex-1 overflow-y-scroll">
-          <slot/>
-        </div>
+  <div class="flex h-screen bg-gray-50">
+    <Sidebar/>
+    <div class="flex flex-col w-full" >
+      <TopBar/>
+      <div class="m-4 ">
+        <p class="font-medium text-4xl">
+          {{title}}
+        </p>
       </div>
+      <div class="flex flex-row flex-1 overflow-y-scroll">
+        <slot/>
+      </div>
+    </div>
   </div>
 </template>
 
