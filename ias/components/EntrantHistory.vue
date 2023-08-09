@@ -8,9 +8,9 @@
         <p>Purpose of Visit <span class="underline">{{entry.passport_country_issue}}</span></p>
       </div>
 
-      <div class="text-2xl flex flex-col">
+      <div class="text-2xl flex flex-col items-center flex-1">
+        <p class="flex flex-1 text-5xl items-center" v-bind:class="safety_rating_style(entry.safety_rating)"><span>{{entry.safety_rating}}</span></p>
         <p>Safety Rating</p>
-        <p><span>{{entry.safety_rating}}</span></p>
       </div>
     </div>
   </div>
