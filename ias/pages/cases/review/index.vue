@@ -37,18 +37,28 @@
     </div>
     <div class="flex flex-col flex-1">
       <p class="text-5xl">Interview Questions</p>
-      <div class="bottom-border mt-3" v-for="question of interviewQuestions">
-        <p class="text-2xl">{{ question.question }}</p>
-        <textarea v-if="!question.canned_response"/>
+      <div class="bottom-border mt-3 flex flex-col" v-for="(question, index) of interviewQuestions" :key="question.id">
+        <div class="flex flex-row">
+          <p class="text-2xl basis-20 flex-2">{{ question.question }}</p>
+          <p class="text-xl basis-8 flex-quarter">Weight: {{question.weight}}</p>
+        </div>
+        <textarea v-bind:ref="'canned_response_open_' + index"
+                  v-bind:name="'canned_response_open_' + index"
+                  v-if="!question.canned_response"/>
         <div v-else>
-          <button>Yes</button>
-          <button>No</button>
+          <label for="canned_response_yes">Yes</label>
+          <input v-bind:ref="'canned_response_yes_' + index"
+                 v-bind:name="'canned_response_yes_' + index " type="checkbox"/>
+
+          <label for="canned_response_no">No</label>
+          <input v-bind:ref="'canned_response_no_' + index"
+                 v-bind:name="'canned_response_no_' + index " type="checkbox"/>
         </div>
         <div class="question">
-          <button v-on:click="changeSafetyRating(question.weight, true)">
+          <button v-on:click="addAnsweredQuestion(question, index, true)">
             Acceptable
           </button>
-          <button v-on:click="changeSafetyRating(question.weight, false)">
+          <button v-on:click="addAnsweredQuestion(question, index, false)">
             Unacceptable
           </button>
           <button v-on:click="generateNewQuestion(question.id)">Skip</button>
@@ -108,6 +118,26 @@ export default{
         default:
           break;
       }
+    },
+    addAnsweredQuestion(question, index, add){
+      // Pull ref
+      let answeredQuestion = JSON.parse(JSON.stringify(question));
+      if (question.canned_response){
+        let responseYes = this.$refs[`canned_response_yes_${index}`][0].checked;
+        let responseNo = this.$refs[`canned_response_no_${index}`][0].checked;
+        if (responseYes){
+          answeredQuestion['response'] = "Yes";
+        } else if (responseNo) {
+          answeredQuestion['response'] = "No";
+        } else {
+          answeredQuestion['response'] = "No answer given";
+        }
+      } else {
+        answeredQuestion['response'] = this.$refs[`canned_response_open_${index}`][0].value;
+      }
+      this.$store.commit('entrants/addAnsweredQuestion', answeredQuestion);
+      this.changeSafetyRating(question.weight, add);
+      this.$store.dispatch('questions/removeQuestion', question.id);
     },
     changeSafetyRating(weight, add) {
       if (add) {

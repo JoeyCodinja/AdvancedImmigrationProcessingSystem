@@ -4,6 +4,7 @@ export const state = () => ({
   entrants: [],
   currentEntrant: {},
   currentEntrantHistory: [],
+  currentEntrantAnsweredQuestions: [],
 })
 
 export const getters = {
@@ -20,13 +21,8 @@ export const getters = {
       return {}
     }
   },
-  getSafetyRating({state, store}) {
-    if (state.currentEntrantHistory){
-      debugger;
-      return store.getters.getLatestEntry(state).safety_rating;
-    } else {
-      return 0;
-    }
+  getCurrentEntrantAnsweredQuestions(state) {
+    return state.currentEntrantAnsweredQuestions;
   }
 }
 
@@ -41,6 +37,9 @@ export const mutations = {
     state["currentEntrantHistory"][0] = latestEntryToUpdate;
     //Reactivity foolishiness
     state["currentEntrantHistory"] = JSON.parse(JSON.stringify(state['currentEntrantHistory']));
+  },
+  addAnsweredQuestion(state, question){
+    state.currentEntrantAnsweredQuestions.push(question);
   }
 }
 

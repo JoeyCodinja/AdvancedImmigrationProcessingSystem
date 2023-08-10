@@ -50,11 +50,17 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
         let interviewQuestions = () => {
             let interviewArray = [];
             for (let count of Array(questionCount).keys()){
-                interviewArray.push(result[Math.floor(Math.random() * questionCount)]);
+                interviewArray.push(result[Math.floor(Math.random() * result.length)]);
             }
             return interviewArray;
         }
         res.send(interviewQuestions());
+    });
+})
+
+app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
+    model.Question.find({}).exec().then((result) => {
+        res.send(result[Math.floor(Math.random()*result.length)])
     });
 })
 
