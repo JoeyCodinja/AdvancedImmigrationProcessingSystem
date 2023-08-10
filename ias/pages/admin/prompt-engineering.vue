@@ -2,66 +2,39 @@
   <BasePage title="Prompt Engineering">
     <div class="flex flex-col">
       <p class="italic text-2xl">Prompts in use</p>
-      <div class="prompt-box flex flex-col">
-        <p class="flex-2">Generate questions which use the Aliens Act (1946) which would restrict entry to the port of Jamaica ?</p>
-        <div class="flex flex-row w-full flex-1 gap-8">
-          <div class="flex-1 blue-btn">Edit</div>
-          <div class="flex-1 red-btn">Delete</div>
-          <div class="flex-1 green-btn">
-            <label for="prompt-enabled">Enabled?</label>
-            <input name="prompt-enabled" type="checkbox" checked="checked"/>
+      <div class="mx-20 my-6 rounded-xl border p-5 shadow-md w-9/12 bg-white " v-for="prompt in prompts">
+        <div class="mt-4 mb-6">
+          <p class="text-base font-semibold">{{ prompt.prompt}}</p>
+        </div>
+        <div>
+          <div class="flex items-center justify-between text-slate-500">
+            <div class="flex space-x-4 md:space-x-8">
+              <button class="inline-block rounded-md bg-blue-500 px-6 py-2 font-semibold text-white shadow-md duration-75 hover:bg-green-500">Edit</button>
+              <button class="inline-block rounded-md bg-blue-500 px-6 py-2 font-semibold text-white shadow-md duration-75 hover:bg-red-700">Delete</button>
+              <div class="inline-block rounded-md bg-black px-6 py-2 font-semibold text-white shadow-md duration-75 hover:bg-grey-500">
+                <label for="prompt-enabled">Enabled?</label>
+                <input name="prompt-enabled" type="checkbox" v-bind:checked="prompt.enabled ? 'checked' : ''"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="prompt-box flex flex-col">
-        <p class="flex-2">Generate questions which use the Immigration Restriction (Commonwealth Citizens Act (1945)) which would restrict entry to the port of Jamaica ?</p>
-        <div class="flex flex-row w-full flex-1 gap-8">
-          <div class="flex-1 blue-btn">Edit</div>
-          <div class="flex-1 red-btn">Delete</div>
-          <div class="flex-1 green-btn">
-            <label for="prompt-enabled">Enabled?</label>
-            <input name="prompt-enabled" type="checkbox" checked="checked"/>
-          </div>
-        </div>
-
-      </div>
-      <div class="prompt-box flex flex-col">
-        <p class="flex-2">Generate questions which use the Passport Act of Jamaica which would restrict entry to the port of Jamaica ?</p>
-        <div class="flex flex-row w-full flex-1 gap-8">
-          <div class="flex-1 blue-btn">Edit</div>
-          <div class="flex-1 red-btn">Delete</div>
-          <div class="flex-1 green-btn">
-            <label for="prompt-enabled">Enabled?</label>
-            <input name="prompt-enabled" type="checkbox" checked="checked"/>
-          </div>
-        </div>
-      </div>
-      <div class="prompt-box flex flex-col">
-        <p class="flex-2">Generate questions which use the Foreign Nationals and Commonwealth Citizens (Employment Act) which would restrict entry to the port of Jamaica ?</p>
-        <div class="flex flex-row w-full flex-1 gap-8">
-          <div class="flex-1 blue-btn">Edit</div>
-          <div class="flex-1 red-btn">Delete</div>
-          <div class="flex-1 green-btn">
-            <label for="prompt-enabled">Enabled?</label>
-            <input name="prompt-enabled" type="checkbox" checked="checked"/>
-          </div>
-        </div>
-      </div>
-      <div class="prompt-box flex flex-col">
-        <p class="flex-2"> Generate questions which use the Nationality Act which would restrict entry to the port of Jamaica ?</p>
-        <div class="flex flex-row w-full flex-1 gap-8">
-          <div class="flex-1 blue-btn">Edit</div>
-          <div class="flex-1 red-btn">Delete</div>
-          <div class="flex-1 green-btn">
-            <label for="prompt-enabled">Enabled?</label>
-            <input name="prompt-enabled" type="checkbox" checked="checked"/>
-          </div>
-        </div>
-      </div>
-
     </div>
   </BasePage>
 </template>
+
+<script>
+export default {
+  computed: {
+    prompts() {
+      return this.$store.getters['prompts/getAllPrompts']
+    }
+  },
+  mounted(){
+    this.$store.dispatch('prompts/retrievePrompts')
+  }
+}
+</script>
 
 <style>
 .prompt-box{
