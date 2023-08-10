@@ -5,8 +5,7 @@
         <img src="/entrant-headshot.png">
         <div class="flex flex-wrap">
           <p class="flex-1 entrant-details text-3xl">Safety Rating:
-            <span class="good-risk"
-                  v-bind:class="safety_rating_style(safety_rating)">
+            <span v-bind:class="safety_rating_style(safety_rating)">
               {{ safety_rating }}
             </span>
           </p>
