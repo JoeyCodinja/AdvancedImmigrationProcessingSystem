@@ -32,11 +32,13 @@
 }
 
 .bad-risk {
-  color: red;
+  border-radius: 100%;
+  border: 5px solid red;
 }
 
 .ok-risk {
-  color: navy;
+  border-radius: 100%;
+  border: 5px solid navy;
 }
 
 .good-risk {
@@ -45,6 +47,12 @@
 }
 
 .tentative-risk {
-  color: yellow;
+  border-radius: 100%;
+  border: 5px solid yellow;
+}
+
+.unknown-risk {
+  border-radius: 100%;
+  border: 5px solid black;
 }
 
