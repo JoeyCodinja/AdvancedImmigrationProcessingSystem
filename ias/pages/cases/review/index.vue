@@ -1,6 +1,6 @@
 <template>
   <BasePage title="Case - Review">
-    <div class="flex flex-col flex-wrap flex-1">
+    <div class="flex flex-col flex flex-1">
       <div class="flex flex-row">
         <img src="/entrant-headshot.png">
         <div class="flex flex-wrap">

@@ -9,7 +9,10 @@
       </div>
 
       <div class="text-2xl flex flex-col items-center flex-1">
-        <p class="flex flex-1 text-5xl items-center" v-bind:class="safety_rating_style(entry.safety_rating)"><span>{{entry.safety_rating}}</span></p>
+        <p class="flex flex-1 text-5xl items-center"
+           v-bind:class="safety_rating_style(entry.safety_rating)">
+          <span>{{entry.safety_rating}}</span>
+        </p>
         <p>Safety Rating</p>
       </div>
     </div>

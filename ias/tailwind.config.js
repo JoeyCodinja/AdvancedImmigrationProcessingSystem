@@ -6,6 +6,7 @@ module.exports = {
         'fifth': '20%'
       },
       flex: {
+        'quarter': '0.25 0.25 1rem',
         'half': '0 0 4rem',
         '1.5': '1.5 0 2rem',
         'two': '2 0 2rem',
