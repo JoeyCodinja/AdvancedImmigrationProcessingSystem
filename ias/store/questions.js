@@ -37,6 +37,12 @@ export const mutations = {
 
   addInterviewQuestion(state, question) {
     state.interviewQuestions.push(question);
+  },
+  removeInterviewQuestion(state, id) {
+    let questionIndex = state.interviewQuestions.findIndex((question) => question.id === id);
+    let interviewQuestionArrayToUpdate = JSON.parse(JSON.stringify(state.interviewQuestions));
+    interviewQuestionArrayToUpdate.splice(questionIndex, 1);
+    state.interviewQuestions = interviewQuestionArrayToUpdate;
   }
 }
 
@@ -64,6 +70,19 @@ export const actions = {
       console.log("Something bad happened");
     }
   },
+  async retrieveInterviewQuestion({commit}, entrantId ){
+    try {
+      let question = await axios.post(`http://localhost:8080/api/questions/interview/single/${entrantId}`).then((response) => {
+        if (response.status === 200) {
+          commit("addInterviewQuestion", response.data);
+        }
+      }).catch((error) => {
+        console.log("Something bad happened");
+      })
+    } catch (e) {
+      console.log("Something bad happened");
+    }
+  },
   async retrieveInterviewQuestions({commit}, entrantId){
     try{
       await axios.post(`http://localhost:8080/api/questions/interview/${entrantId}`).then((response) => {
@@ -76,5 +95,8 @@ export const actions = {
     } catch(e) {
       console.log("Something bad happened");
     }
+  },
+  removeQuestion({commit}, questionId) {
+    commit('removeInterviewQuestion', questionId);
   }
 }

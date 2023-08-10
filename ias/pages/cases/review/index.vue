@@ -51,7 +51,7 @@
           <button v-on:click="changeSafetyRating(question.weight, false)">
             Unacceptable
           </button>
-          <button>Skip</button>
+          <button v-on:click="generateNewQuestion(question.id)">Skip</button>
         </div>
       </div>
     </div>
@@ -115,6 +115,10 @@ export default{
       } else {
         this.safety_rating -= weight
       }
+    },
+    generateNewQuestion(questionId) {
+      this.$store.dispatch('questions/removeQuestion', questionId);
+      this.$store.dispatch('questions/retrieveInterviewQuestion', this.entrant.id);
     },
     safety_rating_style(safetyRatingValue) {
       let safety_rating_class = ""
