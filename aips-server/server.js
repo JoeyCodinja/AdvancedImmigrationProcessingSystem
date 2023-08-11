@@ -49,8 +49,16 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
     model.Question.find({}).exec().then((result) => {
         let interviewQuestions = () => {
             let interviewArray = [];
+            let generatedIndicies = [];
             for (let count of Array(questionCount).keys()){
-                interviewArray.push(result[Math.floor(Math.random() * result.length)]);
+                let randomIndex = Math.floor(Math.random() * result.length);
+                if (generatedIndicies.includes(randomIndex)) {
+                    while (generatedIndicies.includes(randomIndex)) {
+                        randomIndex = Math.floor(Math.random() * result.length);
+                    }
+                }
+                generatedIndicies.push(randomIndex);
+                interviewArray.push(result[randomIndex]);
             }
             return interviewArray;
         }
