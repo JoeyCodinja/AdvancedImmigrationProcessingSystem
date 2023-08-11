@@ -26,11 +26,11 @@
           <div class="flex flex-row">
             <!-- Toggling sections -->
             <p class="flex flex-1 bottom-border
-                      text-center text-2xl font-bold
+                      text-center text-base font-bold
                       right-border tab-padding"
                v-on:click="toggle('overview')">Overview</p>
             <p class="flex flex-1 bottom-border
-                      text-center text-2xl font-bold
+                      text-center text-base font-bold
                       tab-padding"
                v-on:click="toggle('travel_history')">Travel History</p>
           </div>
