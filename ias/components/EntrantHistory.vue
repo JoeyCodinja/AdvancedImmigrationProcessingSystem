@@ -1,17 +1,16 @@
 <template>
   <div class="flex flex-col">
-    <div class="flex flex-row shadow-sm" v-for="entry in history">
+    <div class="flex flex-row shadow-xl mb-5 rounded" v-for="entry in history">
       <div class="flex flex-col flex-1.5">
-        <p>Date of Entry <span class="underline">{{entry.date_of_entry}} </span></p>
-        <p>Passport Number <span class="underline">{{entry.passport_number}}</span></p>
-        <p>Passport Country of Issue <span class="underline">{{entry.passport_country_issue}}</span></p>
-        <p>Purpose of Visit <span class="underline">{{entry.purpose_of_visit}}</span></p>
+        <p class="font-bold">Date of Entry <span class="underlin font-normal">{{formatDate(entry.date_of_entry)}} </span></p>
+        <p class="font-bold">Passport Number <span class="underline font-normal">{{entry.passport_number}}</span></p>
+        <p class="font-bold">Passport Country of Issue <span class="underline font-normal">{{entry.passport_country_issue}}</span></p>
+        <p class="font-bold">Purpose of Visit <span class="underline font-normal">{{entry.purpose_of_visit}}</span></p>
       </div>
 
-      <div class="text-2xl flex flex-col items-center flex-1">
-        <p class="flex flex-1 text-5xl items-center"
-           v-bind:class="safety_rating_style(entry.safety_rating)">
-          <span>{{entry.safety_rating}}</span>
+      <div class="text-base flex flex-col items-center flex-1">
+        <p class="items-center">
+          <span v-bind:class="safety_rating_style(entry.safety_rating)">{{entry.safety_rating}}</span>
         </p>
         <p>Safety Rating</p>
       </div>
@@ -25,6 +24,9 @@ export default {
     history: Array,
   },
   methods: {
+    formatDate(date){
+      return new Date(date).toISOString().slice(0, 10);
+    },
     safety_rating_style(safetyRatingValue) {
       let safety_rating_class = ""
       if (safetyRatingValue > 0 && safetyRatingValue <= 25) {
