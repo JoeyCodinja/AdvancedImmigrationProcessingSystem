@@ -145,7 +145,12 @@ export default{
           answeredQuestion['response'] = "No answer given";
         }
       } else {
-        answeredQuestion['response'] = this.$refs[`canned_response_open_${index}`][0].value;
+        let response = this.$refs[`canned_response_open_${index}`][0].value;
+        if (response.length == 0){
+          answeredQuestion['response'] = "No answer given";
+        } else {
+          answeredQuestion['response'] = this.$refs[`canned_response_open_${index}`][0].value;
+        }
       }
       this.$store.commit('entrants/addAnsweredQuestion', answeredQuestion);
       this.changeSafetyRating(question.weight, add);
