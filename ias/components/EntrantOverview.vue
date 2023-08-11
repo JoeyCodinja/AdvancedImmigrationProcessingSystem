@@ -7,7 +7,7 @@
         <p>{{answeredQuestion.weight}}</p>
       </div>
     </div>
-    <div v-if="!answeredQuestions">
+    <div v-if="answeredQuestions.length === 0">
       <p>No Questions answered for entrant</p>
     </div>
   </div>
