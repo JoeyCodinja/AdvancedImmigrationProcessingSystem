@@ -1,8 +1,10 @@
-{"_id":{"$oid":"64b48b530a9ba36b69b2c318"},"question":"Do you have any food, plants or other organic materials travelling with to declare","weight":18,"category":"potential-contraband","id":7091659346,"canned_response":true}
+{"_id":{"$oid":"64b48b530a9ba36b69b2c318"},"question":"Do you have any food, plants or other organic materials travelling with to declare","weight":18,"category":"potential-contraband","id":7.091659346E+09,"canned_response":true}
 {"_id":{"$oid":"64b9dad682ae72ef28a0d368"},"question":"Are you bringing any pharmaceuticals, chemicals, narcotics and other illicit drugs or biological substances","weight":10,"category":"potential-contraband","id":4.943232905E+09,"canned_response":true}
 {"_id":{"$oid":"64c283ae0ff09e346f096724"},"question":"Where have you flown from?","weight":25,"category":"trip-information","id":4.933309785E+09,"canned_response":false}
 {"_id":{"$oid":"64c286ef0ff09e346f096726"},"question":"How long will you be staying in the Jamaica?","weight":19,"category":"trip-information","id":7.989777391E+09,"canned_response":false}
-{"_id":{"$oid":"64c2ff94f3b237fc6cfddcba"},"question":"Can you provide proof of sufficient funds to support yourself during your stay?","weight":40,"category":"","id":4.2943428534488554E+09,"__v":0,"canned_response":false}
-{"_id":{"$oid":"64c31133f3b237fc6cfddcc4"},"question":" What is your monthly income?","weight":30,"category":"","id":1.0841442368218522E+09,"__v":0,"canned_response":false}
-{"_id":{"$oid":"64c31b34f3b237fc6cfddccf"},"question":" What is the nature of your employment or profession in your home country?","weight":45,"category":"","id":8.363498180890171E+09,"__v":0,"canned_response":false}
-{"_id":{"$oid":"64c34c37f3b237fc6cfddcdc"},"question":" What is the purpose of your visit to this country?","weight":30,"category":"","id":4.591224751774693E+09,"__v":0,"canned_response":false}
+{"_id":{"$oid":"64c2ff94f3b237fc6cfddcba"},"question":"Can you provide proof of sufficient funds to support yourself during your stay?","weight":40,"category":"","id":4.294342853E+09,"__v":0,"canned_response":false}
+{"_id":{"$oid":"64c31133f3b237fc6cfddcc4"},"question":" What is your monthly income?","weight":30,"category":"","id":1.084144236E+09,"__v":0,"canned_response":false}
+{"_id":{"$oid":"64c31b34f3b237fc6cfddccf"},"question":" What is the nature of your employment or profession in your home country?","weight":45,"category":"","id":8.36349818E+09,"__v":0,"canned_response":false}
+{"_id":{"$oid":"64c34c37f3b237fc6cfddcdc"},"question":" What is the purpose of your visit to this country?","weight":30,"category":"","id":4.591224751E+09,"__v":0,"canned_response":false}
+{"_id":{"$oid":"64d59a4a3e6e432b0fbb8381"},"question":"Do you have gifts or articles for resale?","weight":30,"category":"","id":6955108218,"canned_response":true}
+{"_id":{"$oid":"64d59acd3e6e432b0fbb8384"},"question":"Do you have any radioactive or nuclear substances on your person or with your luggage?","weight":40,"category":"potential-contraband","id":9373903779,"canned_response":true}

@@ -2,5 +2,5 @@
 {"_id":{"$oid":"64c2d3720ff09e346f096734"},"prompt":"Generate questions which use the Immigration Restriction (Commonwealth Citizens Act (1945)) which would restrict entry to the port of Jamaica ?","enabled":true}
 {"_id":{"$oid":"64c2d39b0ff09e346f096736"},"prompt":"Generate questions which use the Passport Act of Jamaica which would restrict entry to the port of Jamaica ?","enabled":true}
 {"_id":{"$oid":"64c2d3bd0ff09e346f096738"},"prompt":"Generate questions which use the Foreign Nationals and Commonwealth Citizens (Employment Act) which would restrict entry to the port of Jamaica ?","enabled":true}
-{"_id":{"$oid":"64c2dc290ff09e346f09673a"},"prompt":"Generate questions which use the Nationality Act which would restrict entry to the port of Jamaica ?","enabled":true}
+{"_id":{"$oid":"64c2dc290ff09e346f09673a"},"prompt":"Generate questions which use the Nationality Act which would restrict entry to the port of Jamaica ?","enabled":false}
 {"_id":{"$oid":"64c2df6a0ff09e346f09673c"},"prompt":"Generate a random assortment of questions that immigration officers would ask","enabled":true}
