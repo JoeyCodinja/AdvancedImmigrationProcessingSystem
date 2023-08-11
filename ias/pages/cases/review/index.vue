@@ -177,7 +177,7 @@ export default{
     },
     safety_rating_style(safetyRatingValue) {
       let safety_rating_class = ""
-      if (safetyRatingValue > 0 && safetyRatingValue <= 25) {
+      if (safetyRatingValue <= 25) {
         safety_rating_class = 'bad-risk';
       }
       else if (safetyRatingValue >= 26 && safetyRatingValue <= 50) {
