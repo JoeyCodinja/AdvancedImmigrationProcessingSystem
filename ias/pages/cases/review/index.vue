@@ -73,7 +73,7 @@
                 <button class="unacceptable-button" v-on:click="addAnsweredQuestion(question, index, false)">
                   Unacceptable
                 </button>
-                <button class="skip-button" v-on:click="generateNewQuestion(question.id)">Skip</button>
+                <button class="skip-button" v-on:click="addAnsweredQuestion(question, index, null)">Skip</button>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default{
     changeSafetyRating(weight, add) {
       if (add) {
         this.safety_rating += weight
-      } else {
+      } else if (add == false) {
         this.safety_rating -= weight
       }
     },
