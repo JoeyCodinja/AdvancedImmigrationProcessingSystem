@@ -7,7 +7,7 @@
         <div class="main-content ml-20">
           <div class="">
             <h1 class="font-medium text-4xl title-text inline-block">{{ title }}</h1>
-            <div class="ml-48 inline-block">
+            <div class="ml-48 inline-block" v-if="caseReview==='true'">
               <button class="button">
                 Accept Entry
               </button>
@@ -39,7 +39,8 @@ export default {
     Sidebar
   },
   props: {
-    title: String
+    title: String,
+    caseReview: String
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <BasePage title="Case - Review">
+  <BasePage title="Case - Review" caseReview="true">
     <div class="flex flex-row flex-1">
       <div class="flex flex-col flex-wrap w-one-third p-4">
         <div class="flex flex-row">
@@ -134,6 +134,7 @@ export default{
     addAnsweredQuestion(question, index, add){
       // Pull ref
       let answeredQuestion = JSON.parse(JSON.stringify(question));
+      answeredQuestion['skipped'] = false;
       if (question.canned_response){
         let responseYes = this.$refs[`canned_response_yes_${index}`][0].checked;
         let responseNo = this.$refs[`canned_response_no_${index}`][0].checked;
@@ -143,11 +144,17 @@ export default{
           answeredQuestion['response'] = "No";
         } else {
           answeredQuestion['response'] = "No answer given";
+          if (add === null){
+            answeredQuestion['skipped'] = true;
+          }
         }
       } else {
         let response = this.$refs[`canned_response_open_${index}`][0].value;
         if (response.length == 0){
           answeredQuestion['response'] = "No answer given";
+          if (add === null){
+            answerQuestion['skipped'] = true;
+          }
         } else {
           answeredQuestion['response'] = this.$refs[`canned_response_open_${index}`][0].value;
         }
