@@ -7,8 +7,8 @@
         <p>{{answeredQuestion.weight}}</p>
       </div>
     </div>
-    <div v-if="answeredQuestions.length === 0">
-      <p>No Questions answered for entrant</p>
+    <div v-if="answeredQuestions.length === 0" class="mx-auto">
+      <p class="text-center">No interview questions answered for entrant</p>
     </div>
   </div>
 </template>
