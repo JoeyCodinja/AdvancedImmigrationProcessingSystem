@@ -5,7 +5,8 @@
         <p class="font-bold">Date of Entry <span class="underlin font-normal">{{formatDate(entry.date_of_entry)}} </span></p>
         <p class="font-bold">Passport Number <span class="underline font-normal">{{entry.passport_number}}</span></p>
         <p class="font-bold">Passport Country of Issue <span class="underline font-normal">{{entry.passport_country_issue}}</span></p>
-        <p class="font-bold">Purpose of Visit <span class="underline font-normal">{{entry.purpose_of_visit}}</span></p>
+        <p class="font-bold">Purpose of Visit <span class="underline font-normal">{{toSentenceCase(entry.purpose_of_visit)}}</span></p>
+        <p class="font-bold">Status <span class="font-normal">{{toSentenceCase(entry.status)}}</span></p>
       </div>
 
       <div class="text-base flex flex-col items-center flex-1">
@@ -26,6 +27,9 @@ export default {
   methods: {
     formatDate(date){
       return new Date(date).toISOString().slice(0, 10);
+    },
+    toSentenceCase(string){
+      return string[0].toUpperCase() + string.slice(1)
     },
     safety_rating_style(safetyRatingValue) {
       let safety_rating_class = ""
