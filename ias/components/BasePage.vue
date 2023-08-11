@@ -5,7 +5,20 @@
       <div class="flex flex-row flex-1 overflow-y-scroll">
         <Sidebar />
         <div class="main-content ml-20">
-          <h1 class="font-medium text-4xl title-text">{{ title }}</h1>
+          <div class="">
+            <h1 class="font-medium text-4xl title-text inline-block">{{ title }}</h1>
+            <div class="ml-48 inline-block">
+              <button class="button">
+                Accept Entry
+              </button>
+              <button class="button">
+                Deny Entry
+              </button>
+              <button class="button">
+                Submit for Review
+              </button>
+            </div>
+          </div>
           <div class="content-slot">
             <slot />
           </div>
@@ -42,6 +55,15 @@ export default {
   padding-left: 3rem; /* Add padding to create separation from sidebar */
   padding-top: 2rem; /* Add padding to create separation from topbar */
 
+}
+
+.button{
+  background-color: dimgrey;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  margin-right: 1rem;
 }
 
 .content-slot {
