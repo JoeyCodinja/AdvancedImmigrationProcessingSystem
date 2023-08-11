@@ -21,6 +21,19 @@ export const getters = {
 }
 
 export const mutations = {
+  sortInterviewQuestionsByWeightDesc(state) {
+    console.log('sorting');
+    state.interviewQuestions.sort((question1, question2) => {
+      if (question1.weight < question2.weight){
+        return 1
+      } else if (question1.weight > question2.weight) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+  },
+
   addQuestion(state, question) {
     // Incomplete, needs to get value fo the question to be added
     state.questions.concat(question);
@@ -75,6 +88,7 @@ export const actions = {
       let question = await axios.post(`http://localhost:8080/api/questions/interview/single/${entrantId}`).then((response) => {
         if (response.status === 200) {
           commit("addInterviewQuestion", response.data);
+          commit('sortInterviewQuestionsByWeightDesc');
         }
       }).catch((error) => {
         console.log("Something bad happened");
@@ -88,6 +102,7 @@ export const actions = {
       await axios.post(`http://localhost:8080/api/questions/interview/${entrantId}`).then((response) => {
         if (response.status === 200){
           commit('addInterviewQuestions', response.data);
+          commit('sortInterviewQuestionsByWeightDesc');
         }
       }).catch((error) => {
         console.log("Something bad happened");
@@ -98,5 +113,6 @@ export const actions = {
   },
   removeQuestion({commit}, questionId) {
     commit('removeInterviewQuestion', questionId);
+    commit('sortInterviewQuestionsByWeightDesc');
   }
 }
