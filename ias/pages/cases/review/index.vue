@@ -146,6 +146,7 @@ export default{
           answeredQuestion['response'] = "No answer given";
           if (add === null){
             answeredQuestion['skipped'] = true;
+            this.generateNewQuestion(question.id);
           }
         }
       } else {
@@ -153,7 +154,8 @@ export default{
         if (response.length == 0){
           answeredQuestion['response'] = "No answer given";
           if (add === null){
-            answerQuestion['skipped'] = true;
+            answeredQuestion['skipped'] = true;
+            this.generateNewQuestion(question.id);
           }
         } else {
           answeredQuestion['response'] = this.$refs[`canned_response_open_${index}`][0].value;
@@ -171,7 +173,6 @@ export default{
       }
     },
     generateNewQuestion(questionId) {
-      this.$store.dispatch('questions/removeQuestion', questionId);
       this.$store.dispatch('questions/retrieveInterviewQuestion', this.entrant.id);
     },
     safety_rating_style(safetyRatingValue) {
