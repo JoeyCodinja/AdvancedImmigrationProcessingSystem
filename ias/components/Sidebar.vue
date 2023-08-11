@@ -104,7 +104,7 @@
           <router-link
             to="/cases"
             v-if="$route.path==='/cases'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -144,7 +144,7 @@
           <router-link
             to="/cases/new"
             v-if="$route.path==='/cases/new'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -187,7 +187,7 @@
           <router-link
             to="/cases/review"
             v-if="$route.path==='/cases/review'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -229,7 +229,7 @@
           <router-link
             to="/admin/generative-resources"
             v-if="$route.path==='/admin/generative-resources'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -268,7 +268,7 @@
           <router-link
             to="/admin/question-management"
             v-if="$route.path==='/admin/question-management'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -305,7 +305,7 @@
           <router-link
             to="/admin/prompt-engineering"
             v-if="$route.path==='/admin/prompt-engineering'"
-            class="nav-link"
+            class="nav-link active"
           >
             <svg
               class="nav-icon"
@@ -362,6 +362,7 @@ export default {
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 0.5rem;
+  color: white;
 }
 
 /* Style for navigation text */
@@ -371,7 +372,7 @@ export default {
 }
 
 /* Hover styles for navigation links */
-.nav-link:hover {
+.nav-link.active, .nav-link:hover {
   background-color: #4FD1C5;
   color: white;
   transform: scale(1.05);
