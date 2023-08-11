@@ -49,5 +49,4 @@ Run the following command substituting the <collection> tag with the collections
 - entry
 - prompt
 - purpose_of_visit
-- prompt
 - question
