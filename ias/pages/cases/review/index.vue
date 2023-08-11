@@ -1,72 +1,84 @@
 <template>
   <BasePage title="Case - Review">
-    <div class="flex flex-col flex flex-1">
-      <div class="flex flex-row">
-        <img src="/entrant-headshot.png">
-        <div class="flex flex-wrap">
-          <p class="flex-1 entrant-details text-3xl">Safety Rating:
-            <span v-bind:class="safety_rating_style(safety_rating)">
-              {{ safety_rating }}
-            </span>
-          </p>
-          <p class="flex-1 entrant-details text-3xl">{{entrant.first_name}} {{entrant.last_name}}</p>
-          <p class="flex-1 entrant-details text-xl">Arriving From: <span class="font-bold">MIA</span></p>
-          <p class="flex-1 entrant-details text-xl">Nationality: <span class="font-bold">Jamaican</span></p>
-          <p class="flex-1 entrant-details text-xl">Status: <span class="font-bold">Pending</span></p>
-        </div>
-      </div>
-      <div class="flex flex-col">
+    <div class="flex flex-row flex-1">
+      <div class="flex flex-col flex-wrap w-one-third p-4">
         <div class="flex flex-row">
-          <p class="flex flex-1 bottom-border
-                    text-center text-2xl font-bold
-                    right-border tab-padding"
-             v-on:click="toggle('overview')">Overview</p>
-          <p class="flex flex-1 bottom-border
-                    text-center text-2xl font-bold
-                    tab-padding"
-             v-on:click="toggle('travel_history')">Travel History</p>
+          <!-- Entrant image with border -->
+          <div class="entrant-image items-center">
+            <img src="/entrant-headshot.png" class="">
+          </div>
         </div>
-        <div v-show="show_overview">
-          <EntrantOverview v-bind:entrant="entrant"/>
+        <div class="flex flex-col mt-4 items-center">
+          <!-- Entrant details -->
+            <div class="entrant-safety-score">
+              <p class="safety-score-label">Safety Score</p>
+              <span class="text-4xl font-bold"
+                    v-bind:class="safety_rating_style(safety_rating)">
+                {{ safety_rating }}
+              </span>
+            </div>
+            <p class="entrant-name ">{{entrant.first_name}} {{entrant.last_name}}</p>
+
+            <p class="entrant-detail">Arriving From: <span class="font-bold">MIA</span></p>
+            <p class="entrant-detail">Nationality: <span class="font-bold">Jamaican</span></p>
+            <p class="entrant-detail">Status: <span class="font-bold">Pending</span></p>
+          </div>
+          <div class="flex flex-row">
+            <!-- Toggling sections -->
+            <p class="flex flex-1 bottom-border
+                      text-center text-2xl font-bold
+                      right-border tab-padding"
+               v-on:click="toggle('overview')">Overview</p>
+            <p class="flex flex-1 bottom-border
+                      text-center text-2xl font-bold
+                      tab-padding"
+               v-on:click="toggle('travel_history')">Travel History</p>
+          </div>
+          <div v-show="show_overview">
+            <!-- Entrant overview -->
+            <EntrantOverview v-bind:entrant="entrant"/>
+          </div>
+          <div v-show="show_travel_history">
+            <!-- Entrant Travel History -->
+            <EntrantHistory v-bind:history="entrantHistory"/>
+          </div>
         </div>
-        <div v-show="show_travel_history">
-          <EntrantHistory v-bind:history="entrantHistory"/>
+        <div class="flex flex-col flex-1 w-two-third p-4">
+          <div class="flex flex-col">
+            <p class="text-2xl">Interview Questions</p>
+            <div class="mt-3 flex flex-col" v-if="interviewQuestions.length === 0">
+              All interview questions asked
+            </div>
+            <div class="questions-box" v-for="(question, index) of interviewQuestions" :key="question.id">
+              <div class="flex flex-row">
+                <p class="text-base basis-20 flex-2 font-semibold">{{ question.question }}</p>
+                <p class="text-base font-bold basis-8 flex-half">Weight: {{question.weight}}</p>
+              </div>
+              <textarea v-bind:ref="'canned_response_open_' + index"
+                        v-bind:name="'canned_response_open_' + index"
+                        v-if="!question.canned_response"/>
+              <div v-else>
+                <label for="canned_response_yes">Yes</label>
+                <input v-bind:ref="'canned_response_yes_' + index"
+                       v-bind:name="'canned_response_yes_' + index " type="checkbox"/>
+
+                <label for="canned_response_no">No</label>
+                <input v-bind:ref="'canned_response_no_' + index"
+                       v-bind:name="'canned_response_no_' + index " type="checkbox"/>
+              </div>
+              <div class="question">
+                <button class="accept-button" v-on:click="addAnsweredQuestion(question, index, true)">
+                  Acceptable
+                </button>
+                <button class="unacceptable-button" v-on:click="addAnsweredQuestion(question, index, false)">
+                  Unacceptable
+                </button>
+                <button class="skip-button" v-on:click="generateNewQuestion(question.id)">Skip</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-    </div>
-    <div class="flex flex-col flex-1">
-      <p class="text-5xl">Interview Questions</p>
-      <div class="bottom-border mt-3 flex flex-col" v-for="(question, index) of interviewQuestions" :key="question.id">
-        <div class="flex flex-row">
-          <p class="text-2xl basis-20 flex-2">{{ question.question }}</p>
-          <p class="text-xl basis-8 flex-quarter">Weight: {{question.weight}}</p>
-        </div>
-        <textarea v-bind:ref="'canned_response_open_' + index"
-                  v-bind:name="'canned_response_open_' + index"
-                  v-if="!question.canned_response"/>
-        <div v-else>
-          <label for="canned_response_yes">Yes</label>
-          <input v-bind:ref="'canned_response_yes_' + index"
-                 v-bind:name="'canned_response_yes_' + index " type="checkbox"/>
-
-          <label for="canned_response_no">No</label>
-          <input v-bind:ref="'canned_response_no_' + index"
-                 v-bind:name="'canned_response_no_' + index " type="checkbox"/>
-        </div>
-        <div class="question">
-          <button v-on:click="addAnsweredQuestion(question, index, true)">
-            Acceptable
-          </button>
-          <button v-on:click="addAnsweredQuestion(question, index, false)">
-            Unacceptable
-          </button>
-          <button v-on:click="generateNewQuestion(question.id)">Skip</button>
-        </div>
-      </div>
-    </div>
-
-
   </BasePage>
 </template>
 
@@ -178,9 +190,21 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .bottom-border {
   border-bottom: 2px black solid;
+}
+
+.w-one-third {
+  width: 33.33333%;
+}
+
+.w-two-third {
+  width: 66.66667%;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .right-border {
@@ -188,10 +212,87 @@ export default{
 }
 
 .tab-padding {
-  padding-left:2rem;
+  padding-left: 2rem;
 }
 
-.entrant-details {
- flex: 1 1 50%;
+
+.entrant-image {
+  border: 5px solid #0b5688; /* Blue color */
+  padding: 1rem; /* Padding to create space between the image and the border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+.entrant-image:hover {
+  border-color: #0c0fbe; /* Red color on hover */
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.4); /* Bigger shadow on hover */
+}
+
+.entrant-detail {
+  font-size:large;
+}
+
+.entrant-name {
+  font-size: 2rem;
+  font-weight:700;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.entrant-safety-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.safety-score-label {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.questions-box {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.35);
+  width: 100%;
+  background-color: white;
+}
+
+.accept-button
+,.unacceptable-button
+,.skip-button {
+  background-color:black;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-right:2rem;
+}
+
+.accept-button:hover {
+  background-color: #13ac40;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.unacceptable-button:hover {
+  background-color: #c21313;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.skip-button:hover {
+  background-color: #f6e05e;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+textarea {
+  background-color: lightgray;
+  width: 100%;
 }
 </style>
