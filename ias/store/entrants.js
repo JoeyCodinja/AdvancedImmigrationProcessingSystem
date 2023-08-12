@@ -49,6 +49,13 @@ export const mutations = {
     //Reactivity foolishiness
     state["currentEntrantHistory"] = JSON.parse(JSON.stringify(state['currentEntrantHistory']));
   },
+  updateLatestEntryStatus(state, newStatus) {
+    let latestEntryToUpdate = JSON.parse(JSON.stringify(state.currentEntrantHistory[0]));
+    latestEntryToUpdate['status'] = newStatus;
+    state["currentEntrantHistory"][0] = latestEntryToUpdate
+    // Reactivity foolishness
+    state["currentEntrantHistory"] = JSON.parse(JSON.stringify(state['currentEntrantHistory']))
+  },
   addAnsweredQuestion(state, question){
     state.currentEntrantAnsweredQuestions.push(question);
   }

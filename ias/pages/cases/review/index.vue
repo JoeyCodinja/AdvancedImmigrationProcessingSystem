@@ -21,7 +21,12 @@
 
             <p class="entrant-detail">Arriving From: <span class="font-bold">MIA</span></p>
             <p class="entrant-detail">Nationality: <span class="font-bold">Jamaican</span></p>
-            <p class="entrant-detail">Status: <span class="font-bold">Pending</span></p>
+            <p class="entrant-detail">Status:
+              <span class="font-bold" v-if="!Object.keys(latestEntrantHistory).includes('status')">Pending</span>
+              <span class="font-bold" v-if="Object.keys(latestEntrantHistory).includes('status') && latestEntrantHistory.status == 'granted'">Entry Granted</span>
+              <span class="font-bold" v-if="Object.keys(latestEntrantHistory).includes('status') && latestEntrantHistory.status == 'denied'">Denied Entry</span>
+              <span class="font-bold" v-if="Object.keys(latestEntrantHistory).includes('status') && latestEntrantHistory.status == 'review'">Submitted For Review</span>
+            </p>
           </div>
           <div class="flex flex-row">
             <!-- Toggling sections -->
