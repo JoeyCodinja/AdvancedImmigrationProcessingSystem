@@ -30,13 +30,8 @@
                       right-border tab-padding"
                v-on:click="toggle('overview')">Overview</p>
             <p class="flex flex-1 bottom-border
-                      text-center text-base font-bold
-                      right-border tab-padding"
+                      text-center text-base font-bold tab-padding"
                v-on:click="toggle('travel_history')">Travel History</p>
-            <p class="flex flex-1 bottom-border
-                      text-center text-base font-bold
-                      tab-padding"
-               v-on:click="toggle('pre_evaluation')">Pre-Evaluation</p>
           </div>
           <div v-show="show_overview">
             <!-- Entrant overview -->
@@ -45,10 +40,6 @@
           <div v-show="show_travel_history">
             <!-- Entrant Travel History -->
             <EntrantHistory v-bind:history="entrantHistory"/>
-          </div>
-          <div v-show="show_pre_evaluation">
-            <!-- Entrant Pre Evaluation information -->
-            <EntrantPreEvaluation v-bind:history="entrantHistory"/>
           </div>
         </div>
         <div class="flex flex-col flex-1 w-two-third p-4">
@@ -112,7 +103,6 @@ export default{
     return {
       show_overview: true,
       show_travel_history: false,
-      show_pre_evaluation: false,
       fetching_questions: true
     }
   },

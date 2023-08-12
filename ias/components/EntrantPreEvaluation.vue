@@ -71,11 +71,12 @@ export default {
 
   },
   beforeMount() {
-    this.$store.dispatch('questions/retrievePreEvalInterviewQuestions');
-    //Add all pre-eval weights to score by default;
-    for (let question of this.pre_eval_questions) {
-      this.$store.commit("entrants/updateLatestEntrySafetyRating", this.safety_rating + question.weight);
-    }
+    this.$store.dispatch('questions/retrievePreEvalInterviewQuestions').then(() => {
+      //Add all pre-eval weights to score by default;
+      for (let question of this.pre_eval_questions) {
+        this.$store.commit("entrants/updateLatestEntrySafetyRating", this.safety_rating + question.weight);
+      }
+    });
   },
   mounted() {
     //calculate the new safety rating based on the pre_evaluation
