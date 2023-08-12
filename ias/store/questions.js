@@ -83,9 +83,16 @@ export const actions = {
       console.log("Something bad happened");
     }
   },
-  async retrieveInterviewQuestion({commit}, entrantId ){
+  async retrieveInterviewQuestion({commit, getters, rootGetters}, entrantId ){
     try {
-      let question = await axios.post(`http://localhost:8080/api/questions/interview/single/${entrantId}`).then((response) => {
+      let generatedQuestions = []
+      rootGetters['entrants/getCurrentEntrantAnsweredQuestions'].forEach((answeredQuestion) => {
+        generatedQuestions.push(answeredQuestion.id);
+      });
+      getters.getAllInterviewQuestions.forEach((unansweredQuestion) => {
+        generatedQuestions.push(unansweredQuestion.id);
+      });
+      let question = await axios.post(`http://localhost:8080/api/questions/interview/single/${entrantId}`, {'generatedQuestions': generatedQuestions}).then((response) => {
         if (response.status === 200) {
           commit("addInterviewQuestion", response.data);
           commit('sortInterviewQuestionsByWeightDesc');
