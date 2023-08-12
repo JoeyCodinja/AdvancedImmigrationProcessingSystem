@@ -68,7 +68,7 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
 })
 
 app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
-    model.Question.find({}).exec().then((result) => {
+    model.Question.find({interview_question: {$eq: true}}).exec().then((result) => {
         res.send(result[Math.floor(Math.random()*result.length)])
     });
 })
