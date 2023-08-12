@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 export const questionSchema = new Schema({
     canned_response: Boolean,
+    interview_question: Boolean,
     question: String,
     weight: Number,
     category: String,

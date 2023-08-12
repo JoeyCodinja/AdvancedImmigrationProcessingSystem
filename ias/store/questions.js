@@ -4,9 +4,18 @@ export const state = () => ({
   questions: [],
   interviewQuestions: [],
   preEvalQuestions: [],
+  question: {}
 })
 
 export const getters = {
+  getQuestion: (state) => (id) => {
+    return state.questions.find((question) => {
+      return question.id === id
+    })
+  },
+  getSetQuestion(state) {
+    return state.question;
+  },
   getAllQuestions(state) {
     return state.questions
   },
@@ -42,9 +51,31 @@ export const mutations = {
     state.questions.concat(question);
   },
 
+  setQuestion(state, question) {
+    state.question = question;
+  },
+
   addQuestions(state, questions) {
     // Incomplete, needs to get value fo the question to be added
     state.questions = questions;
+  },
+
+  updateQuestion(state, question) {
+    let clonedQuestions = JSON.parse(JSON.stringify(state.questions));
+    let updatedIndex = clonedQuestions.findIndex((clonedQuestion) => {
+      return clonedQuestion.id == question.id
+    })
+    clonedQuestions.splice(updatedIndex, 1, question);
+    state.questions = clonedQuestions;
+  },
+
+  removeQuestion(state, id) {
+    let questionIndex = state.questions.findIndex((question) => {
+      return question.id === id;
+    });
+    let updatedQuestions = JSON.parse(JSON.stringify(state.questions));
+    updatedQuestions.splice(questionIndex, 1);
+    state.questions = updatedQuestions;
   },
 
   addInterviewQuestions(state, questions) {
@@ -139,8 +170,35 @@ export const actions = {
       console.log("Something bad happened");
     }
   },
+  async updateQuestion({commit}, question) {
+    try {
+        await axios.put(`http://localhost:8080/api/questions/${question.id}`, question).then((response) => {
+          if (response.status == 200) {
+            commit('updateQuestion', question);
+          }
+        }).catch((error) => {
+          console.log('Something bad happened');
+        })
+    } catch (e) {
+
+    }
+  },
+  async deleteQuestion({commit}, id) {
+    try{
+      let questions = await axios.delete(`http://localhost:8080/api/questions/${id}`).then((response) => {
+        if (response.status == 200){
+          commit('removeQuestion', id);
+        }
+      })
+    } catch (e) {
+      console.log("Something bad happened");
+    }
+  },
   removeQuestion({commit}, questionId) {
     commit('removeInterviewQuestion', questionId);
     commit('sortInterviewQuestionsByWeightDesc');
+  },
+  setQuestion({commit, getters}, questionId) {
+    commit('setQuestion', getters.getQuestion(questionId));
   }
 }

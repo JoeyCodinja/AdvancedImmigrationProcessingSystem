@@ -23,7 +23,7 @@ app.get('/api/questions', (req, res) => {
         res.send(result);
     });
 })
-app.get('/api/questions/:question_id(\d+)', (req, res) => {
+app.get('/api/questions/:question_id(\\d+)', (req, res) => {
     let allQuestions =  model.Question.findOne({id: {$eq: req.params['question_id']}}).exec().then((result) => {
         res.send(result);
     });
@@ -43,6 +43,22 @@ app.post('/api/questions/new', (req, res) => {
     } else {
         res.status(400).send("Bad request");
     }
+})
+
+app.put('/api/questions/:id(\\d+)', (req, res) => {
+    let question_id = req.params['id']
+    model.Question.findOneAndUpdate({id: {$eq: question_id}}, req.body, {new: true}).then((result) => {
+        res.status(200).send(result);
+    });
+
+})
+
+app.delete('/api/questions/:id(\\d+)', (req, res) => {
+    let question_id = req.params['id']
+    model.Question.deleteOne({id: {$eq: question_id}}).then((result) => {
+        res.status(204).send();
+    });
+
 })
 
 app.post('/api/questions/interview/:entrant_id', (req, res) => {
