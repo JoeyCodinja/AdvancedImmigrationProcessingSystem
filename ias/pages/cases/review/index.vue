@@ -104,6 +104,7 @@ export default{
     return {
       show_overview: true,
       show_travel_history: false,
+      fetching_questions: true
     }
   },
   computed: {
