@@ -22,7 +22,6 @@ export const getters = {
 
 export const mutations = {
   sortInterviewQuestionsByWeightDesc(state) {
-    console.log('sorting');
     state.interviewQuestions.sort((question1, question2) => {
       if (question1.weight < question2.weight){
         return 1
