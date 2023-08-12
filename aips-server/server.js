@@ -80,7 +80,12 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
                     {
                         "role": "user",
                         "content": "Select from this list of numbers a combination that would add up to 70 but less than 100, " +
-                        `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON Format.`
+                        `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON Format which looks like the following [
+    {"id": 7989777391, "weight": 19},
+    {"id": 4294342853, "weight": 40},
+    {"id": 1084144236, "weight": 30},
+    {"id": 6955108218, "weight": 30}
+  ]`
                     }
                 ],
                 "temperature": 0.7
@@ -177,7 +182,12 @@ app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
                     {
                         "role": "user",
                         "content": "Select from this list of numbers a combination that would add up to 70 but less than 100, " +
-                            `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON format.`
+                            `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON format which looks like the following [
+    {"id": 7989777391, "weight": 19},
+    {"id": 4294342853, "weight": 40},
+    {"id": 1084144236, "weight": 30},
+    {"id": 6955108218, "weight": 30}
+  ]`
                     }
                 ],
                 "temperature": 0.7
