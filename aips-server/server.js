@@ -80,7 +80,7 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
                     {
                         "role": "user",
                         "content": "Select from this list of numbers a combination that would add up to 70 but less than 100, " +
-                        `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids as JSON.`
+                        `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON Format.`
                     }
                 ],
                 "temperature": 0.7
@@ -108,6 +108,7 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
                 response.on('end', function() {
                     let chatGPTResponse = JSON.parse(str);
                     let chatCompletion = chatGPTResponse['choices'][0]['message']['content']
+                    console.log("Chat Completion Log:", chatCompletion);
                     let JSONRegex = /"id":\s(\d*),\s"weight":\s(\d*)/gm
                     let matchArray;
                     let resultObject = []
@@ -176,7 +177,7 @@ app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
                     {
                         "role": "user",
                         "content": "Select from this list of numbers a combination that would add up to 70 but less than 100, " +
-                            `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids as JSON.`
+                            `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids in JSON format.`
                     }
                 ],
                 "temperature": 0.7
@@ -204,6 +205,7 @@ app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
                 response.on('end', function() {
                     let chatGPTResponse = JSON.parse(str);
                     let chatCompletion = chatGPTResponse['choices'][0]['message']['content']
+                    console.log("Chat Completion Response: ", chatCompletion)
                     let JSONRegex = /"id":\s(\d*),\s"weight":\s(\d*)/gm
                     let matchArray;
                     let resultObject = []
