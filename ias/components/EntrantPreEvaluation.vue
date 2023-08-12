@@ -1,10 +1,11 @@
 <template>
   <div>
-    <p>Pre-Evaluated Questions</p>
     <hr>
+    <div class="border-top pt-5 mt-3"></div>
+    <button class="rounded-2xl border bg-black px-3 py-1 text-white font-bold"> Pre-Evaluated Questions </button>
     <div class="questions-box" v-for="preEvalQuestion in pre_eval_questions">
       <div class="flex flex-row">
-        <p class="text-base basis-20 flex-2 font-semibold border-b pb-3">
+        <p class="text-base basis-20 flex-2 font-semibold ">
           {{preEvalQuestion.question}}
         </p>
       </div>

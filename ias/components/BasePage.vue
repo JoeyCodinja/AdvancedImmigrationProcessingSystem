@@ -8,13 +8,13 @@
           <div class="">
             <h1 class="font-medium text-4xl title-text inline-block">{{ title }}</h1>
             <div class="ml-48 inline-block" v-if="caseReview==='true'">
-              <button class="button">
+              <button class="button" :disabled="safety_rating < 76">
                 Accept Entry
               </button>
-              <button class="button">
+              <button class="button" >
                 Deny Entry
               </button>
-              <button class="button">
+              <button class="button" >
                 Submit for Review
               </button>
             </div>
@@ -41,6 +41,11 @@ export default {
   props: {
     title: String,
     caseReview: String
+  },
+  computed: {
+    safety_rating(){
+      return this.$store.getters['entrants/getCurrentEntrantSafetyRating'];
+    }
   }
 };
 </script>
@@ -58,7 +63,7 @@ export default {
 
 }
 
-.button{
+.button[disabled]{
   background-color: dimgrey;
   color: white;
   padding: 0.5rem 1.5rem;

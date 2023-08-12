@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <div v-for="answeredQuestion in answeredQuestions" class="questions-box">
       <div class="flex flex-row">
-        <p class="text-base basis-20 flex-2 font-semibold border-b pb-3">{{ answeredQuestion.question }}</p>
+        <p class="text-base basis-20 flex-2 font-semibold border-b pb-5 mt-5">{{ answeredQuestion.question }}</p>
       </div>
       <div class="mt-4">
         <p class="font-bold">Response</p>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-if="answeredQuestions.length === 0" class="mx-auto">
-      <p class="text-center">No interview questions answered for entrant</p>
+      <p class="text-center font-bold">No interview questions answered for entrant</p>
     </div>
     <EntrantPreEvaluation/>
   </div>
