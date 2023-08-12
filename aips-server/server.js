@@ -19,19 +19,20 @@ app.use((err, req, res, next) => {
 const AIPSCONNECT = mongoose.connect('mongodb://127.0.0.1:27017/AIPS')
 
 app.get('/api/questions', (req, res) => {
-    let allQuestions =  model.Question.find({}).exec().then((result) => {
+    let allQuestions =  model.Question.find({interview_question: {$eq: true}}).exec().then((result) => {
+        res.send(result);
+    });
+})
+app.get('/api/questions/:question_id', (req, res) => {
+    let allQuestions =  model.Question.findOne({id: {$eq: req.params['question_id']}}).exec().then((result) => {
         res.send(result);
     });
 })
 
-app.get('/api/questions/', (req, res, next) => {
-    try {
-        let question = model.Question.findOne({}).exec().then((result) => {
-            res.send(result);
-        });
-    } catch (error) {
-        next(error);
-    }
+app.get('/api/questions/preeval', (req, res, next) => {
+    let allQuestions =  model.Question.find({interview_question: {$eq: false}}).exec().then((result) => {
+        res.send(result);
+    });
 })
 
 app.post('/api/questions/new', (req, res) => {
@@ -46,7 +47,7 @@ app.post('/api/questions/new', (req, res) => {
 
 app.post('/api/questions/interview/:entrant_id', (req, res) => {
     const questionCount = 5
-    model.Question.find({}).exec().then((result) => {
+    model.Question.find({interview_question: {$eq: true}}).exec().then((result) => {
         let interviewQuestions = () => {
             let interviewArray = [];
             let generatedIndicies = [];
