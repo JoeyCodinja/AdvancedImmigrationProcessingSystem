@@ -23,7 +23,7 @@ app.get('/api/questions', (req, res) => {
         res.send(result);
     });
 })
-app.get('/api/questions/:question_id', (req, res) => {
+app.get('/api/questions/:question_id(\d+)', (req, res) => {
     let allQuestions =  model.Question.findOne({id: {$eq: req.params['question_id']}}).exec().then((result) => {
         res.send(result);
     });
