@@ -48,7 +48,11 @@
 
       <div class="flex flex-col">
         <p class="text-2xl">Interview Questions</p>
-        <div class="mt-3 flex flex-col" v-if="interviewQuestions.length === 0">
+        <div class="mt-3 flex flex-col" v-if="fetching_questions == true">
+          Fetching Questions
+          <font-awesome-icon icon="fa-solid fa-spinner" spin/>
+        </div>
+        <div class="mt-3 flex flex-col" v-if="interviewQuestions.length === 0 && fetching_questions == false">
           All interview questions asked
         </div>
         <div class="questions-box" v-for="(question, index) of interviewQuestions" :key="question.id">
@@ -208,7 +212,9 @@ export default{
   },
   beforeMount() {
     this.$store.dispatch('entrants/findEntrant', "F77698918").then(() => {
-      this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id);
+      this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id).then(() => {
+        this.fetching_questions = false;
+      });
     });
   },
   mounted() {
