@@ -207,10 +207,11 @@ export default{
     }
   },
   beforeMount() {
-    this.$store.dispatch('entrants/findEntrant', "F77698918");
+    this.$store.dispatch('entrants/findEntrant', "F77698918").then(() => {
+      this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id);
+    });
   },
   mounted() {
-    this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id);
   }
 }
 </script>
