@@ -44,41 +44,53 @@
           </div>
         </div>
         <div class="flex flex-col flex-1 w-two-third p-4">
-          <div class="flex flex-col">
-            <p class="text-2xl">Interview Questions</p>
-            <div class="mt-3 flex flex-col" v-if="interviewQuestions.length === 0">
-              All interview questions asked
-            </div>
-            <div class="questions-box" v-for="(question, index) of interviewQuestions" :key="question.id">
-              <div class="flex flex-row">
-                <p class="text-base basis-20 flex-2 font-semibold">{{ question.question }}</p>
-                <p class="text-base font-bold basis-8 flex-half">Weight: {{question.weight}}</p>
-              </div>
-              <textarea v-bind:ref="'canned_response_open_' + index"
-                        v-bind:name="'canned_response_open_' + index"
-                        v-if="!question.canned_response"/>
-              <div v-else>
-                <label for="canned_response_yes">Yes</label>
-                <input v-bind:ref="'canned_response_yes_' + index"
-                       v-bind:name="'canned_response_yes_' + index " type="checkbox"/>
+      <!-- Rest of the code -->
 
-                <label for="canned_response_no">No</label>
-                <input v-bind:ref="'canned_response_no_' + index"
-                       v-bind:name="'canned_response_no_' + index " type="checkbox"/>
-              </div>
-              <div class="question">
-                <button class="accept-button" v-on:click="addAnsweredQuestion(question, index, true)">
-                  Acceptable
-                </button>
-                <button class="unacceptable-button" v-on:click="addAnsweredQuestion(question, index, false)">
-                  Unacceptable
-                </button>
-                <button class="skip-button" v-on:click="addAnsweredQuestion(question, index, null)">Skip</button>
-              </div>
+      <div class="flex flex-col">
+        <p class="text-2xl">Interview Questions</p>
+        <div class="mt-3 flex flex-col" v-if="interviewQuestions.length === 0">
+          All interview questions asked
+        </div>
+        <div class="questions-box" v-for="(question, index) of interviewQuestions" :key="question.id">
+          <div class="flex flex-row">
+            <p class="text-base basis-20 flex-2 font-semibold border-b pb-3">{{ question.question }}</p>
+            <div class="ml-auto">
+              <button class="rounded-2xl border bg-yellow-300 px-3 py-1 text-xs font-bold">
+                Weight: {{ question.weight }}
+              </button>
             </div>
+          </div>
+          <textarea v-bind:ref="'canned_response_open_' + index"
+                    v-bind:name="'canned_response_open_' + index"
+                    v-if="!question.canned_response"/>
+                    <div v-else>
+          <div class="canned-buttons">
+            <label for="canned_response_yes" class="canned-label">
+              <input v-bind:ref="'canned_response_yes_' + index"
+                    v-bind:name="'canned_response_group_' + index "
+                    type="radio" class="canned-radio-button"/> Yes
+            </label>
+
+            <label for="canned_response_no" class="canned-label">
+              <input v-bind:ref="'canned_response_no_' + index"
+                    v-bind:name="'canned_response_group_' + index "
+                    type="radio" class="canned-radio-button"/> No
+            </label>
+          </div>
+        </div>
+          <div class="question mt-4">
+            <button class="accept-button" v-on:click="addAnsweredQuestion(question, index, true)">
+              Acceptable
+            </button>
+            <button class="unacceptable-button" v-on:click="addAnsweredQuestion(question, index, false)">
+              Unacceptable
+            </button>
+            <button class="skip-button" v-on:click="addAnsweredQuestion(question, index, null)">Skip</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
   </BasePage>
 </template>
 
@@ -307,5 +319,28 @@ export default{
 textarea {
   background-color: lightgray;
   width: 100%;
+}
+
+.canned-radio-button {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #999;
+  border-radius: 50%;
+  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.canned-radio-button:checked {
+  border-color: #0c0fbe;
+  background-color: #0c0fbe;
+}
+
+.canned-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight:500;
 }
 </style>
