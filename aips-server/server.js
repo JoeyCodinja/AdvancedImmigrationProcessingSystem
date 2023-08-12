@@ -47,24 +47,99 @@ app.post('/api/questions/new', (req, res) => {
 
 app.post('/api/questions/interview/:entrant_id', (req, res) => {
     const questionCount = 5
-    model.Question.find({interview_question: {$eq: true}}).exec().then((result) => {
-        let interviewQuestions = () => {
-            let interviewArray = [];
-            let generatedIndicies = [];
-            for (let count of Array(questionCount).keys()){
-                let randomIndex = Math.floor(Math.random() * result.length);
-                if (generatedIndicies.includes(randomIndex)) {
-                    while (generatedIndicies.includes(randomIndex)) {
-                        randomIndex = Math.floor(Math.random() * result.length);
-                    }
-                }
-                generatedIndicies.push(randomIndex);
-                interviewArray.push(result[randomIndex]);
+    let query = {interview_question: {$eq: true}}
+    let generatedQuestions = req.body['generated_questions']
+    if (Object.keys(req.body).includes('generated_questions')){
+        query['id'] = {$nin: generatedQuestions}
+    }
+    model.Entry.find({entrant_id: {$eq: req.params.entrant_id }}).exec().then((entries) => {
+        // Find latest entry
+        entries.sort((entry_a, entry_b) => {
+            if (entry_a.date_of_entry > entry_b.date_of_entry) {
+                return -1
+            } else if (entry_a.date_of_entry < entry_b.date_of_entry) {
+                return 1
+            } else {
+                return 0
             }
-            return interviewArray;
-        }
-        res.send(interviewQuestions());
-    });
+        });
+
+        let latestEntry = entries[0]
+        console.log("latestEntry:", latestEntry);
+        let categoriesSatisfied = latestEntry.categories_satisfied;
+        query['category'] = {$nin: categoriesSatisfied}
+        model.Question.find(query).exec().then((questions) => {
+            let question_weights = questions.map((question) => {
+                return {id: question.id, weight:question.weight}
+            });
+            console.log("Question Weights: ", JSON.stringify(question_weights));
+            console.log("Communicating with ChatGPT");
+            let openai_request_body = {
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "Select from this list of numbers a combination that would add up to 70 but less than 100, " +
+                        `using the numbers from this list of objects coming from the weight property, ${JSON.stringify(question_weights)}. Just provide the values and their corresponding ids as JSON.`
+                    }
+                ],
+                "temperature": 0.7
+            }
+            let request_options = {
+                host: 'api.openai.com',
+                path: '/v1/chat/completions',
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                    'Content-Type': 'application/json',
+                    'OpenAI-Organization': `${process.env.OPENAI_ORG_KEY}`,
+                    'Connection': 'keepalive'
+                }
+            }
+            function process_response(response) {
+                // TODO: Will have to parse the response as
+                //  json for content type reasons at some point
+                console.log("processing response");
+                let str = '';
+                let errstr = '';
+                response.on('data', function(chunk) {
+                    str += chunk;
+                });
+                response.on('end', function() {
+                    let chatGPTResponse = JSON.parse(str);
+                    let chatCompletion = chatGPTResponse['choices'][0]['message']['content']
+                    let JSONRegex = /"id":\s(\d*),\s"weight":\s(\d*)/gm
+                    let matchArray;
+                    let resultObject = []
+                    while((matchArray = JSONRegex.exec(chatCompletion)) !== null){
+                        resultObject.push({'weight': matchArray[2], 'id':matchArray[1]})
+                    }
+                    let finalQuestionList = questions.filter((question) => {
+                        let found = resultObject.find((chatGPTResult) => {
+                            return chatGPTResult.id == question.id
+                        });
+                        if (found){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    })
+                    res.send(finalQuestionList);
+                })
+                response.on('error', function(error) {
+                    res.send(error);
+                })
+            }
+            try {
+                let chatGPTRequest = https.request(request_options, process_response);
+                console.log("Request Body:\n", openai_request_body);
+                chatGPTRequest.write(JSON.stringify(openai_request_body));
+                chatGPTRequest.end();
+            } catch (error) {
+                next(error);
+            }
+        });
+    })
 })
 
 app.post('/api/questions/interview/single/:entrant_id', (req, res) => {
