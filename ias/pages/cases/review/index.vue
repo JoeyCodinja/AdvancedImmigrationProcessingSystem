@@ -131,22 +131,13 @@ export default{
   },
   methods: {
     toggle(panel) {
-      switch (panel) {
-        case 'overview':
-          this.$data.show_overview = true;
-          this.$data.show_travel_history = false;
-          break;
-        case 'travel_history':
-          this.$data.show_overview = false;
-          this.$data.show_travel_history = true;
-          break;
-        case 'interview_questions':
-          this.$data.show_overview = false;
-          this.$data.show_travel_history = false;
-          break;
-        default:
-          break;
-      }
+      let toggles = Object.keys(this.$data).filter((key) => key.includes('show'));
+      let panelsToDeToggle = toggles.filter((key) => !key.includes(panel));
+      this.$data[`show_${panel}`] = true;
+      panelsToDeToggle.forEach((panel) => {
+        console.log(`Detoggling: ${panel}`);
+        this.$data[panel] = false;
+      })
     },
     addAnsweredQuestion(question, index, add){
       // Pull ref
