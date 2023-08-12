@@ -109,7 +109,7 @@ app.post('/api/questions/interview/:entrant_id', (req, res) => {
                     let chatGPTResponse = JSON.parse(str);
                     let chatCompletion = chatGPTResponse['choices'][0]['message']['content']
                     console.log("Chat Completion Log:", chatCompletion);
-                    let JSONRegex = /"id":\s(\d*),\s"weight":\s(\d*)/gm
+                    let JSONRegex = /"id":\s(\d*),\s*"weight":\s(\d*)/gm
                     let matchArray;
                     let resultObject = []
                     while((matchArray = JSONRegex.exec(chatCompletion)) !== null){
