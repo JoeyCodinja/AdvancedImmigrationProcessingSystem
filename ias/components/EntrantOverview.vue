@@ -17,6 +17,7 @@
     <div v-if="answeredQuestions.length === 0" class="mx-auto">
       <p class="text-center">No interview questions answered for entrant</p>
     </div>
+    <EntrantPreEvaluation/>
   </div>
 </template>
 

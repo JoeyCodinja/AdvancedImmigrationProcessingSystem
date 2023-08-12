@@ -3,6 +3,7 @@ import axios from 'axios'
 export const state = () => ({
   entrants: [],
   currentEntrant: {},
+  currentEntrantPreEval: {},
   currentEntrantHistory: [],
   currentEntrantAnsweredQuestions: [],
 })
@@ -14,12 +15,22 @@ export const getters = {
   getCurrentEntrantHistory(state) {
     return state.currentEntrantHistory
   },
+  getCurrentEntrantPreEval(state, getters) {
+    let latestEntry = getters.getLatestEntry;
+    if (Object.keys(latestEntry).length > 0){
+      return latestEntry.preeval_checks;
+    }
+    return {}
+  },
   getLatestEntry(state) {
     if (state.currentEntrantHistory.length > 0){
       return state.currentEntrantHistory[0];
     } else {
       return {}
     }
+  },
+  getCurrentEntrantSafetyRating(state, getters) {
+    return getters['getLatestEntry']['safety_rating'];
   },
   getCurrentEntrantAnsweredQuestions(state) {
     return state.currentEntrantAnsweredQuestions;

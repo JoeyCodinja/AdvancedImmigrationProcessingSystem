@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export const state = () => ({
   questions: [],
-  interviewQuestions: []
+  interviewQuestions: [],
+  preEvalQuestions: [],
 })
 
 export const getters = {
@@ -17,6 +18,9 @@ export const getters = {
   },
   getInterviewQuestionCount(state) {
     return state.interviewQuestions.length;
+  },
+  getPreEvalInterviewQuestions(state) {
+    return state.preEvalQuestions;
   }
 }
 
@@ -50,6 +54,11 @@ export const mutations = {
   addInterviewQuestion(state, question) {
     state.interviewQuestions.push(question);
   },
+
+  addPreEvalInterviewQuestions(state, questions){
+    state.preEvalQuestions = questions;
+  },
+
   removeInterviewQuestion(state, id) {
     let questionIndex = state.interviewQuestions.findIndex((question) => question.id === id);
     let interviewQuestionArrayToUpdate = JSON.parse(JSON.stringify(state.interviewQuestions));
@@ -114,6 +123,19 @@ export const actions = {
         console.log("Something bad happened");
       })
     } catch(e) {
+      console.log("Something bad happened");
+    }
+  },
+  async retrievePreEvalInterviewQuestions({commit}) {
+    try{
+      let questions = await axios.get('http://localhost:8080/api/questions/preeval').then((response) => {
+        if (response.status == 200) {
+          commit('addPreEvalInterviewQuestions', response.data);
+        }
+      }).catch((error) => {
+        console.log("Something bad happened");
+      })
+    } catch (e) {
       console.log("Something bad happened");
     }
   },
