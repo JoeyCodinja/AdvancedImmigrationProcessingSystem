@@ -33,26 +33,31 @@
 
 .bad-risk {
   border-radius: 100%;
+  padding: 5%;
   border: 5px solid red;
 }
 
 .ok-risk {
   border-radius: 100%;
+  padding: 5%;
   border: 5px solid navy;
 }
 
 .good-risk {
-  border-radius: 100%;
+  border-radius:100%;
+  padding: 5%;
   border: 5px solid limegreen;
 }
 
 .tentative-risk {
   border-radius: 100%;
+  padding: 5%;
   border: 5px solid yellow;
 }
 
 .unknown-risk {
   border-radius: 100%;
+  padding: 5%;
   border: 5px solid black;
 }
 
