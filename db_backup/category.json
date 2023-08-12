@@ -1,3 +1,10 @@
 {"_id":{"$oid":"64b48b8f0a9ba36b69b2c320"},"name":"Trip Information","slug":"trip-information"}
 {"_id":{"$oid":"64c2833b0ff09e346f096720"},"name":"Potential Contraband","slug":"potential-contraband"}
-{"_id":{"$oid":"64d233208927f2e0b28d83f4"},"name":"Trip History","slug":"trip-history"}
+{"_id":{"$oid":"64d233208927f2e0b28d83f4"},"name":"Travel History","slug":"travel-history"}
+{"_id":{"$oid":"64d6b5ae5eabf950c5903927"},"name":"Identity Verification","slug":"identity-verification"}
+{"_id":{"$oid":"64d6b5fc5eabf950c5903929"},"name":"Employment and Finances","slug":"employment-and-finances"}
+{"_id":{"$oid":"64d6b6245eabf950c590392b"},"name":"Health and Medical","slug":"health-and-medical"}
+{"_id":{"$oid":"64d6b6625eabf950c590392d"},"name":"Criminal and Security Checks","slug":"criminal-and-security-checks"}
+{"_id":{"$oid":"64d6b69b5eabf950c590392f"},"name":"Address and Contact Information","slug":"address-and-contact-information"}
+{"_id":{"$oid":"64d6b6bb5eabf950c5903931"},"name":"Intent To Leave","slug":"intent-to-leave"}
+{"_id":{"$oid":"64d6b6e75eabf950c5903933"},"name":"Additional Travel Companions","slug":"additional-travel-companions"}
