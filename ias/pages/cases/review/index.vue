@@ -5,7 +5,9 @@
         <div class="flex flex-row">
           <!-- Entrant image with border -->
           <div class="entrant-image items-center">
-            <img src="/entrant-headshot.png" class="">
+            <img src="/entrant-headshot.png" v-if="entrant.id == 3659133665">
+            <img src="/istockphoto-1171169127-612x612.jpg" v-if="entrant.id == 3131477250">
+            <img src="/istockphoto-1386479313-612x612.jpg" v-if="entrant.id == 5649084341">
           </div>
         </div>
         <div class="flex flex-col mt-4 items-center">
@@ -19,8 +21,8 @@
             </div>
             <p class="entrant-name ">{{entrant.first_name}} {{entrant.last_name}}</p>
 
-            <p class="entrant-detail">Arriving From: <span class="font-bold">MIA</span></p>
-            <p class="entrant-detail">Nationality: <span class="font-bold">Jamaican</span></p>
+            <p class="entrant-detail">Arriving From: <span class="font-bold">{{ latestEntrantHistory.departure_port }}</span></p>
+            <p class="entrant-detail">Nationality: <span class="font-bold">{{ latestEntrantHistory.passport_country_issue }}</span></p>
             <p class="entrant-detail">Status:
               <span class="font-bold" v-if="!Object.keys(latestEntrantHistory).includes('status')">Pending</span>
               <span class="font-bold" v-if="Object.keys(latestEntrantHistory).includes('status') && latestEntrantHistory.status == 'granted'">Entry Granted</span>
@@ -206,14 +208,11 @@ export default{
       return safety_rating_class;
     }
   },
-  beforeMount() {
-    this.$store.dispatch('entrants/findEntrant', "F77698918").then(() => {
-      this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id).then(() => {
-        this.fetching_questions = false;
-      });
-    });
-  },
   mounted() {
+    this.$store.commit('questions/removeInterviewQuestions');
+    this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id).then(() => {
+      this.fetching_questions = false;
+    });
   }
 }
 </script>

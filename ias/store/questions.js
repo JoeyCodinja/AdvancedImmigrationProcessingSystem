@@ -13,6 +13,11 @@ export const getters = {
       return question.id === id
     })
   },
+  getIntervalQuestion: (state) => (id) => {
+    return state.preEvalQuestions.find((question) => {
+      return question.id === id
+    })
+  },
   getSetQuestion(state) {
     return state.question;
   },
@@ -95,6 +100,10 @@ export const mutations = {
     let interviewQuestionArrayToUpdate = JSON.parse(JSON.stringify(state.interviewQuestions));
     interviewQuestionArrayToUpdate.splice(questionIndex, 1);
     state.interviewQuestions = interviewQuestionArrayToUpdate;
+  },
+
+  removeInterviewQuestions(state) {
+    state.interviewQuestions = [];
   }
 }
 
@@ -200,5 +209,8 @@ export const actions = {
   },
   setQuestion({commit, getters}, questionId) {
     commit('setQuestion', getters.getQuestion(questionId));
+  },
+  setPreEvalQuestion({commit, getters}, questionId) {
+    commit('setQuestion', getters.getIntervalQuestion(questionId));
   }
 }

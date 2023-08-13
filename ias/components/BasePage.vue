@@ -16,7 +16,7 @@
               <button class="font-bold button deny"v-on:click="process_entry('deny')">
                 Deny Entry
               </button>
-              <button class="font-bold button review" v-on:click="process_entry('review')">
+              <button class="font-bold button review" style="color:black" v-on:click="process_entry('review')">
                 Submit for Review
               </button>
             </div>

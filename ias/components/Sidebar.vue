@@ -44,8 +44,10 @@
             type="text"
             class="w-full rounded-tl-md rounded-bl-md px-2 py-3 text-sm text-gray-600 focus:outline-none"
             placeholder="Search"
+            v-bind:ref="'caseSearch'"
+            v-bind:name="'caseSearch'"
           />
-          <button class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block">
+          <button class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block" v-on:click="runFindEntrant">
             <svg
               class="w-4 h-4 fill-current"
               fill="currentColor"
@@ -240,6 +242,43 @@
             <span class="nav-text">Question Management</span>
           </router-link>
 
+          <!-- Business Rule -->
+          <router-link
+            to="/admin/business-rule"
+            v-if="$route.path!=='/admin/business-rule'"
+            class="nav-link"
+          >
+            <svg
+              class="nav-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"
+              ></path>
+            </svg>
+            <span class="nav-text">Business Rule</span>
+          </router-link>
+
+          <router-link
+            to="/admin/business-rule"
+            v-if="$route.path==='/admin/business-rule'"
+            class="nav-link active"
+          >
+            <svg
+              class="nav-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"
+              ></path>
+            </svg>
+            <span class="nav-text">Business Rule</span>
+          </router-link>
+
           <!-- Prompt Engineering -->
           <router-link
             to="/admin/prompt-engineering"
@@ -285,7 +324,13 @@
 
 <script>
 export default {
-  name: "Sidebar"
+  name: "Sidebar",
+  methods: {
+    runFindEntrant() {
+      this.$store.dispatch('entrants/findEntrant', this.$refs['caseSearch'].value)
+      this.$router.push({path: '/cases/review', replace: true});
+    }
+  }
 }
 </script>
 
