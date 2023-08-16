@@ -6,6 +6,7 @@ export const state = () => ({
   currentEntrantPreEval: {},
   currentEntrantHistory: [],
   currentEntrantAnsweredQuestions: [],
+  currentEntrantOriginalSafetyRating: 0
 })
 
 export const getters = {
@@ -42,6 +43,11 @@ export const mutations = {
     state.currentEntrant = entrantWithHistory.entrant;
     state.currentEntrantHistory = entrantWithHistory.history;
   },
+  setOriginalSafetyRating(state) {
+    if (state.currentEntrant){
+      state.currentEntrantOriginalSafetyRating = state.currentEntrant.safety_rating
+    }
+  },
   updateLatestEntrySafetyRating(state, newSafetyRating) {
     let latestEntryToUpdate = JSON.parse(JSON.stringify(state.currentEntrantHistory[0]));
     latestEntryToUpdate['safety_rating'] = newSafetyRating;
@@ -58,6 +64,12 @@ export const mutations = {
   },
   addAnsweredQuestion(state, question){
     state.currentEntrantAnsweredQuestions.push(question);
+  },
+  setSafetyRatingToOriginal(state) {
+    let latestEntry = JSON.parse(JSON.stringify(state.currentEntrantHistory[0]));
+    latestEntry.safety_rating = state.currentEntrantOriginalSafetyRating;
+    state.currentEntrantHistory[0] = latestEntry;
+    state.currentEntrantHistory = JSON.parse(JSON.stringify(state.currentEntrantHistory));
   }
 }
 
@@ -69,6 +81,7 @@ export const actions = {
       }).then((response) => {
         if (response.data){
           commit('setCurrentEntrantAndHistory', response.data)
+          commit('setOriginalSafetyRating');
         }
       }).catch((error) => {
         console.log ("Something bad happened");

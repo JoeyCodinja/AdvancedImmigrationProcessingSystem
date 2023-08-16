@@ -72,9 +72,11 @@ export default {
 
   },
   beforeMount() {
+    this.$store.commit('entrants/setSafetyRatingToOriginal');
     this.$store.dispatch('questions/retrievePreEvalInterviewQuestions').then(() => {
       //Add all pre-eval weights to score by default;
       for (let question of this.pre_eval_questions) {
+        console.log(`${question}: ${question.weight}`);
         this.$store.commit("entrants/updateLatestEntrySafetyRating", this.safety_rating + question.weight);
       }
     });
