@@ -45,7 +45,7 @@ export const mutations = {
   },
   setOriginalSafetyRating(state) {
     if (state.currentEntrant){
-      state.currentEntrantOriginalSafetyRating = state.currentEntrant.safety_rating
+      state.currentEntrantOriginalSafetyRating = state.currentEntrantHistory[0].safety_rating;
     }
   },
   updateLatestEntrySafetyRating(state, newSafetyRating) {

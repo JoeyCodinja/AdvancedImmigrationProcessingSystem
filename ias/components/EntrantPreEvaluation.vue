@@ -47,8 +47,8 @@ export default {
     return {
       preeval_value_map: {
         7338974730: 'interpol_watchlist_hit',
-        1393655088: 'local_crime_database',
-        1827493059: '',
+        1393655088: 'local_crime_database_hit',
+        1827493059: 'previous_entry_violations',
         4128868394: 'passport_valid',
         6391991544: 'visa_valid',
       }
