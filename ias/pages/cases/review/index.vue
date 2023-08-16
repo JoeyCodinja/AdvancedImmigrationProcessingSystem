@@ -209,6 +209,10 @@ export default{
     }
   },
   mounted() {
+    if (this.entrant === undefined || this.entrant === null || Object.keys(this.entrant).length === 0) {
+      this.$router.push({path: '/cases', replace:true});
+      return;
+    }
     this.$store.commit('questions/removeInterviewQuestions');
     this.$store.dispatch('questions/retrieveInterviewQuestions', this.entrant.id).then(() => {
       this.fetching_questions = false;
