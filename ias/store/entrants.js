@@ -28,6 +28,16 @@ export const getters = {
       return state.currentEntrantHistory[0];
     } else {
       return {}
+  }
+  },
+  getEntrantById: (state) => (id) => {
+    let entrantFound = state.entrants.find((entrant) => {
+      return entrant.id === id
+    })
+    if (entrantFound) {
+      return entrantFound;
+    } else {
+      return {};
     }
   },
   getCurrentEntrantSafetyRating(state, getters) {
@@ -70,10 +80,30 @@ export const mutations = {
     latestEntry.safety_rating = state.currentEntrantOriginalSafetyRating;
     state.currentEntrantHistory[0] = latestEntry;
     state.currentEntrantHistory = JSON.parse(JSON.stringify(state.currentEntrantHistory));
+  },
+  addEntrant(state, entrant){
+    state.entrants.push(entrant);
+  },
+  removeEntrants(state) {
+    state.entrants = [];
   }
 }
 
 export const actions = {
+  async fetchEntrant({commit}, entrant_id) {
+    try {
+      let entrant = await axios.get(`http://localhost:8080/api/entrants/${entrant_id}`).then((response) => {
+        if (response.data){
+          commit('addEntrant', response.data);
+        }
+      }).catch((error) => {
+        console.log("Something bad happened");
+      })
+      return entrant;
+    } catch (e) {
+      console.log("Something bad happened");
+    }
+  },
   async findEntrant({commit}, passport_number) {
     try {
       await axios.post('http://localhost:8080/api/entrants/find', {
@@ -89,5 +119,5 @@ export const actions = {
     } catch (e) {
       console.log("Something bad happened");
     }
-  }
+  },
 }

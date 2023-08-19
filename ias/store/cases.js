@@ -18,14 +18,14 @@ export const mutations = {
     state.cases.push(entry_case);
   },
   addCases(state, cases) {
-    state.cases.concat(cases);
+    state.cases = cases;
   }
 }
 
 export const actions = {
-  async retrieveCases({commit}) {
+  async retrieveCasesReadyForReview({commit}) {
     try{
-      let cases = await axios.get('http://localhost:8080/api/cases/')
+      await axios.get('http://localhost:8080/api/cases/for-review')
         .then((response) => {
           if (response.data) {
             commit('addCases', response.data);

@@ -2,118 +2,42 @@
   <BasePage title="Cases">
     <div class="flex flex-col justify-center items-center h-full">
       <router-link class="create-case-button" to="/cases/new">Create New Case</router-link>
-      <div class="cases-box">
+      <div class="cases-box" v-for="entryCase in cases">
         <div class="flex flex-row">
           <div class="flex-1 entrant-image">
-            <img src="/entrant-headshot.png">
+            <img src="/entrant-headshot.png" v-if="entryCase.entrant_id === 3659133665">
+            <img src="/istockphoto-1171169127-612x612.jpg" v-if="entryCase.entrant_id === 3131477250">
+            <img src="/istockphoto-1386479313-612x612.jpg" v-if="entryCase.entrant_id === 5649084341">
           </div>
           <div class="flex flex-row flex-2 entrant-info">
             <div class="info-item risk-item">
-              Risk Rating: <span class="risk-rating good-risk">98</span>
+              Risk Rating: <span class="risk-rating good-risk">{{entryCase.safety_rating}}</span>
             </div>
             <div class="info-details ml-6 flex-1">
               <div class="info-column">
                 <div class="info-row">
                   <div class="info-name">First Name:</div>
-                  <div class="info-value">Derek</div>
+                  <div class="info-value">{{ caseEntrantMap[entryCase.entrant_id].first_name }}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-name">Last Name:</div>
-                  <div class="info-value">Jeter</div>
+                  <div class="info-value">{{ caseEntrantMap[entryCase.entrant_id].last_name }}</div>
                 </div>
               </div>
               <div class="info-column">
                 <div class="info-row">
                   <div class="info-name">Arriving From:</div>
-                  <div class="info-value">MIA</div>
+                  <div class="info-value">{{ entryCase.departure_port }}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-name">Nationality:</div>
-                  <div class="info-value">Jamaican</div>
+                  <div class="info-value">{{ entryCase.passport_country_issue }}</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="review-link">
-            <a v-on:click="runFindEntrant('F77698918')">
-              Review
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="cases-box">
-        <div class="flex flex-row">
-          <div class="flex-1 entrant-image">
-            <img src="/istockphoto-1171169127-612x612.jpg">
-          </div>
-          <div class="flex flex-row flex-2 entrant-info">
-            <div class="info-item risk-item">
-              Risk Rating: <span class="risk-rating good-risk">98</span>
-            </div>
-            <div class="info-details ml-6 flex-1">
-              <div class="info-column">
-                <div class="info-row">
-                  <div class="info-name">First Name:</div>
-                  <div class="info-value">Youssef</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-name">Last Name:</div>
-                  <div class="info-value">Moyer</div>
-                </div>
-              </div>
-              <div class="info-column">
-                <div class="info-row">
-                  <div class="info-name">Arriving From:</div>
-                  <div class="info-value">DXB</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-name">Nationality:</div>
-                  <div class="info-value">United Arab Emirates</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="review-link">
-            <a v-on:click="runFindEntrant('A12847822')">
-              Review
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="cases-box">
-        <div class="flex flex-row">
-          <div class="flex-1 entrant-image">
-            <img src="/istockphoto-1386479313-612x612.jpg">
-          </div>
-          <div class="flex flex-row flex-2 entrant-info">
-            <div class="info-item risk-item">
-              Risk Rating: <span class="risk-rating good-risk">98</span>
-            </div>
-            <div class="info-details ml-6 flex-1">
-              <div class="info-column">
-                <div class="info-row">
-                  <div class="info-name">First Name:</div>
-                  <div class="info-value">Monty</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-name">Last Name:</div>
-                  <div class="info-value">Dean</div>
-                </div>
-              </div>
-              <div class="info-column">
-                <div class="info-row">
-                  <div class="info-name">Arriving From:</div>
-                  <div class="info-value">POS</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-name">Nationality:</div>
-                  <div class="info-value">Trinidad and Tobago</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="review-link">
-            <a v-on:click="runFindEntrant('B41126245')">
+            <a v-on:click="runFindEntrant(entryCase.passport_number)">
               Review
             </a>
           </div>
@@ -125,6 +49,18 @@
 
 <script>
 export default {
+  computed: {
+    cases() {
+      return this.$store.getters['cases/getAllCases'];
+    },
+    caseEntrantMap() {
+      let map = {};
+      for (let entryCase of this.cases){
+        map[entryCase.entrant_id] = this.$store.getters['entrants/getEntrantById'](entryCase.entrant_id);
+      }
+      return map;
+    }
+  },
   methods: {
     runFindEntrant(passport_number) {
       this.$store.dispatch('entrants/findEntrant', passport_number).then(() => {
@@ -132,7 +68,12 @@ export default {
       })
     }
   },
-  beforeMount() {
+  async beforeMount() {
+    await this.$store.dispatch('entrants/removeEntrants');
+    await this.$store.dispatch('cases/retrieveCasesReadyForReview');
+    for (let entryCase of this.cases) {
+      await this.$store.dispatch('entrants/fetchEntrant', entryCase.entrant_id);
+    }
   }
 }
 </script>
