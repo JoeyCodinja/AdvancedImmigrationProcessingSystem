@@ -300,6 +300,12 @@ app.get('/api/cases', (req, res, next) => {
     })
 })
 
+app.get('/api/cases/for-review', (req, res, next) => {
+    model.Entry.find({"status": {$not: {$exists: true}}}).exec().then((result) => {
+        res.send(result);
+    })
+})
+
 app.get('/api/categories', (req,res,next) => {
     let allCategories = model.Category.find({}).exec().then((result) => {
         res.send(result);
