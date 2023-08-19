@@ -273,6 +273,12 @@ app.get('/api/entrants', (req,res) => {
     })
 })
 
+app.get('/api/entrants/:entrant_id', (req,res,next) => {
+    model.Entrant.findOne({id: req.params['entrant_id']}).exec().then((result) => {
+        res.send(result);
+    })
+})
+
 app.post('/api/entrants/find/', (req, res) => {
     let result;
     model.Entry.find({passport_number: req.body.passport_number}).sort({date_of_entry: -1}).exec().then( (history) => {
