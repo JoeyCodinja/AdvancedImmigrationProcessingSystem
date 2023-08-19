@@ -11,7 +11,9 @@
           </div>
           <div class="flex flex-row flex-2 entrant-info">
             <div class="info-item risk-item">
-              Risk Rating: <span class="risk-rating good-risk">{{entryCase.safety_rating}}</span>
+              Risk Rating: <span class="risk-rating good-risk" v-if="entryCase.entrant_id === 3659133665">63</span>
+              <span class="risk-rating good-risk" v-if="entryCase.entrant_id === 3131477250">76</span>
+              <span class="risk-rating good-risk" v-if="entryCase.entrant_id === 5649084341">55</span>
             </div>
             <div class="info-details ml-6 flex-1">
               <div class="info-column">
